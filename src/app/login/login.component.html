@@ -1,0 +1,20 @@
+
+<div class="login-container">
+  <div class="login-card">
+    <p class="sub-title">Iniciar sesión</p>
+    <div class="form-group">
+      <div class="box" *ngIf="!confirmationResult">
+        <label for="phone">Número de Teléfono:</label>
+        <input type="tel" id="phone" [(ngModel)]="phoneNumber" placeholder="+591">
+        <div id="recaptcha-container"></div>
+        <button (click)="sendVerificationCode()">Enviar Código</button>
+      </div>
+
+      <div *ngIf="confirmationResult">
+        <label for="verificationCode">Código de Verificación:</label>
+        <input type="text" id="verificationCode" [(ngModel)]="verificationCode" placeholder="654758">
+        <button (click)="verifyCode()">Ingresar</button>
+      </div>
+  </div>
+</div>
+
