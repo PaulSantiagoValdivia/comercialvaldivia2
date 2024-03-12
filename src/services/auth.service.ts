@@ -40,21 +40,26 @@ export class AuthService {
 
         const userCredential = await this.confirmationResult.confirm(verificationCode);
         console.log('Usuario autenticado:', userCredential);
+        return userCredential;
       } catch (error) {
         console.error('Error al verificar el código de verificación:', error);
         throw error;
       }
     }
-
+  getAuth():Auth{
+    return this.auth;
+  }
 
   isLoggedIn(): boolean {
     if (!this.auth) {
       return false; // Firebase Auth no está inicializado
+    }else{
+      return true;
     }
-    // Verificar si hay un usuario autenticado actualmente
-    const user: User | null = this.auth.currentUser;
-    console.log(user);
+    // // Verificar si hay un usuario autenticado actualmente
+    // const user: User | null = this.auth.currentUser;
+    // console.log(user);
 
-    return !!user; // Devuelve true si hay un usuario, false si no hay ninguno
+    // return !!user; // Devuelve true si hay un usuario, false si no hay ninguno
   }
 }

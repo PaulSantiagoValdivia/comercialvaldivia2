@@ -9,17 +9,29 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 // import { provideHttpClient } from '@angular/common/http';
 import { initializeApp } from 'firebase/app'
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCzTRr-per6InoGGY4EMOEMzK8E2gOX53g",
+//   authDomain: "testauth-293c3.firebaseapp.com",
+//   projectId: "testauth-293c3",
+//   storageBucket: "testauth-293c3.appspot.com",
+//   messagingSenderId: "977934146477",
+//   appId: "1:977934146477:web:5c0b60f158fe3f0e625f24",
+//   measurementId: "G-X86JPMQNDX"
+// };
 const firebaseConfig = {
-  apiKey: "AIzaSyCzTRr-per6InoGGY4EMOEMzK8E2gOX53g",
-  authDomain: "testauth-293c3.firebaseapp.com",
-  projectId: "testauth-293c3",
-  storageBucket: "testauth-293c3.appspot.com",
-  messagingSenderId: "977934146477",
-  appId: "1:977934146477:web:5c0b60f158fe3f0e625f24",
-  measurementId: "G-X86JPMQNDX"
+  apiKey: "AIzaSyDbWH-Nxg2FuR9H1-yk7rjEVY6_XwG9juw",
+  authDomain: "test-cbntrade.firebaseapp.com",
+  projectId: "test-cbntrade",
+  storageBucket: "test-cbntrade.appspot.com",
+  messagingSenderId: "164556829628",
+  appId: "1:164556829628:web:91ce830488533ef4afb1b9",
+  measurementId: "G-H7B0ECN420"
 };
-
-initializeApp(firebaseConfig);
+function obtenerFireBaseConfig(){
+  return firebaseConfig;
+}
+console.log("INICIALIZANDO");
+let _app=initializeApp(firebaseConfig);
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withHashLocation()),
@@ -28,4 +40,7 @@ export const appConfig: ApplicationConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule
   ) ]
+
 };
+
+
