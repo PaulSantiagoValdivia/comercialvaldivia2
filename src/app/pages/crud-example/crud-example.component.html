@@ -3,8 +3,32 @@
   <app-sidebar></app-sidebar>
   <div class="main-content">
     <!-- Contenido principal de tu página aquí -->
-    <div class="content">
-        teasdasdasdasdasdasasd
+    <div    class="content">
+        <table class="table_general">
+           <thead>
+              <th>Proveedor</th>
+              <th>Responsable</th>
+              <th>Ci</th>
+              <th>Celular</th>
+              <th>Correo</th>
+              <th>Region</th>
+              <th></th>
+           </thead>
+           <tbody>
+              <tr *ngFor="let a of this.list">
+                <td>{{a.nombre}}</td>
+                <td>{{a.persona.nombre}}</td>
+                <td>{{a.persona.ci}}</td>
+                <td>{{a.persona.celular}}</td>
+                <td>{{a.persona.correo}}</td>
+                <td>{{a.persona.region}}</td>
+                <td class="td_acciones">
+                  <button class="main-btn-warning"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                  <button class="main-btn-danger"><i class="fa-solid fa-trash-can"></i> Eliminar</button>
+                </td>
+              </tr>
+           </tbody>
+        </table>
     </div>
   </div>
 </div>

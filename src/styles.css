@@ -1,7 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 body{
   margin: 0;
+
 }
+:root {
+  --main-color-success:rgb(2, 153, 22);
+  --main-color-danger:rgb(223, 85, 61);
+  --main-color-warning:rgb(255, 199, 46);
+  --main-table_header:rgb(255, 199, 46);
+  --main-table_header_text_color:rgb(27, 27, 27);
+  --main-table_body_text_color:rgb(66, 66, 66);
+}
+
+.main-btn-success{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-success);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-success:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.main-btn-warning{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-warning);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-warning:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.main-btn-danger{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-danger);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-danger:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+
+
 .home-container {
   display: flex;
   flex-direction: row;
@@ -13,11 +62,11 @@ body{
   margin: 0 auto;
   padding: 30px;
   background-color: #ffffff !important;
-  width: 90%;
+  width: 92%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   margin-top: 12px;
   height: 85vh;
-  border-radius: 70px;
+  border-radius: 10px;
   color: rgb(0, 0, 0);
 }
 .main-content {
@@ -25,3 +74,43 @@ flex: 1;
 padding: 10px;
 }
 
+<<<<<<< HEAD
+=======
+ .btn-guardar{
+
+ }
+.table_general thead{
+
+}
+.table_general td, .table_general th {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table_general th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-table_header);
+  color: var(--main-table_header_text_color);
+  font-weight: bold;
+}
+.table_general td {
+
+  color: var(--main-table_body_text_color);
+
+}
+.table_general {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table_general tr:nth-child(even){background-color: #f2f2f2;}
+
+.table_general tr:hover {background-color: #ddd;}
+.table_general .td_acciones{
+  display:flex;
+  grid-gap: 5px;
+}
+>>>>>>> master
