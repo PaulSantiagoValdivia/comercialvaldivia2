@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "testauth-293c3"
+  },
+  "targets": {
+    "testauth-293c3": {
+      "hosting": {
+        "sidebar": [
+          "testauth-293c3"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -1,0 +1,11 @@
+{
+  "hosting": [
+    {
+      "target": "sidebar",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      }
+    }
+  ]
+}
