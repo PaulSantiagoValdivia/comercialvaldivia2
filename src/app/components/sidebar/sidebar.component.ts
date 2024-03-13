@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -10,12 +11,17 @@ import { CommonModule } from '@angular/common';
   imports: [ FormsModule, CommonModule ],
 })
 export class SidebarComponent implements OnInit {
+
+  constructor(  ) {
+
+  }
   ngOnInit() {
+
+
 
   }
   activeSubMenuItemIndex: number | null = null; // Variable para mantener el índice del elemento de submenú activo
 
-  constructor() { }
   sidebarActive: boolean = false;
   svgActive: boolean[] = [];
   activeSubMenu: number | null = null; // Variable para mantener el submenú activo
