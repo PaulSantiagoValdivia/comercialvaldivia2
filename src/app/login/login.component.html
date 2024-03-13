@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="login-card" *ngIf="!userExist">
+    <p class="sub-title" >Iniciar sesión</p>
+    <div class="form-group"  >
+      <div class="box" *ngIf="!confirmationResult">
+        <label for="phone">Número de Teléfono:</label>
+        <input type="tel" id="phone" [(ngModel)]="phoneNumber" placeholder="+591">
+        <div id="recaptcha-container"></div>
+        <button (click)="sendVerificationCode()">Enviar Código</button>
+      </div>
+
+      <div *ngIf="confirmationResult">
+        <label for="verificationCode">Código de Verificación:</label>
+        <input type="text" id="verificationCode" [(ngModel)]="verificationCode" placeholder="654758">
+        <button (click)="verifyCode()">Ingresar</button>
+      </div>
+
+    </div>
+  </div>
+  <div class="login-card" *ngIf="userExist">
+    <p>El número de teléfono no está registrado en la tabla de personas.</p>
+    <form (ngSubmit)="registerPerson()">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
+      <label for="rol">Rol:</label>
+      <input type="text" id="rol" [(ngModel)]="rol" name="rol">
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+</div>
+

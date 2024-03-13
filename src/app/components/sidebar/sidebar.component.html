@@ -1,0 +1,48 @@
+<div class="sidebar" [ngClass]="{ active: sidebarActive }">
+  <div class="menu-btn" (click)="toggleSidebar()">
+    <img class="svg" [src]="svg"/>
+  </div>
+  <div class="head">
+    <div class="user-img">
+      <img [src]="imagenUrl" alt="" />
+    </div>
+    <div class="user-details">
+      <p class="title">web developer</p>
+      <p class="name">John Doe</p>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="menu">
+      <p class="title">Main</p>
+      <ul>
+        <li [ngClass]="{ active: svgActive[i] }" *ngFor="let menuItem of mainMenuItems; let i = index" (click)="toggleSubMenu(i)">
+          <a >
+            <img class="ph-bold" [src]="menuItem.iconClass" alt="Icon">
+            <span class="text">{{ menuItem.text }}</span>
+            <img class="svg2" [src]="svg" *ngIf="menuItem.subMenuItems"/>
+          </a>
+          <ul class="sub-menu" *ngIf="activeSubMenu === i" (click)="closeSubMenu($event)">
+            <li *ngFor="let subMenuItem of menuItem.subMenuItems; let j = index"
+            [ngClass]="{ 'active': activeSubMenuItemIndex === j }"
+            (click)="toggleSubMenuItem(j)">
+          <a>
+            <span  class="text">{{ subMenuItem.text }}</span>
+          </a>
+        </li>
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="menu">
+      <p class="title">Account</p>
+      <ul>
+        <li >
+          <a (click)="logout()" >
+            <span  class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
