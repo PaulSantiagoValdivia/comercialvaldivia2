@@ -18,7 +18,7 @@ export class PersonaService {
     console.log("Document written with ID: ", docRef.id);
   }
   async getList(){
-    getDocs()
+  //  getDocs()
   }
 }
 
