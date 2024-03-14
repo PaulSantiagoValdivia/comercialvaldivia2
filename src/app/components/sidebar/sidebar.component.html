@@ -16,7 +16,7 @@
       <p class="title">Main</p>
       <ul>
         <li [ngClass]="{ active: svgActive[i] }" *ngFor="let menuItem of mainMenuItems; let i = index" (click)="toggleSubMenu(i)">
-          <a >
+          <a  href="{{menuItem.url}}">
             <img class="ph-bold" [src]="menuItem.iconClass" alt="Icon">
             <span class="text">{{ menuItem.text }}</span>
             <img class="svg2" [src]="svg" *ngIf="menuItem.subMenuItems"/>
@@ -25,7 +25,7 @@
             <li *ngFor="let subMenuItem of menuItem.subMenuItems; let j = index"
             [ngClass]="{ 'active': activeSubMenuItemIndex === j }"
             (click)="toggleSubMenuItem(j)">
-          <a>
+          <a href="{{subMenuItem.url}}">
             <span  class="text">{{ subMenuItem.text }}</span>
           </a>
         </li>

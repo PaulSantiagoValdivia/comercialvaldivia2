@@ -44,9 +44,17 @@ export class SidebarComponent implements OnInit {
       ]
     },
     {
-      text: 'Posts',
+      text: 'Persona',
       iconClass: '/assets/add.svg',
-      subMenuItems: null
+      subMenuItems: null,
+      url:"./#/persona"
+    },
+    {
+      text: 'Proveedor',
+      iconClass: '/assets/add.svg',
+      subMenuItems: null,
+      url:"./#/proveedor"
+
     },
     {
       text: 'Schedules',

@@ -1,0 +1,56 @@
+
+<div class="home-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <!-- Contenido principal de tu página aquí -->
+
+    <div class="content">
+      <!-- <h3 style="text-align: center;">ADMINISTRAR PERSONAS</h3> -->
+      <div style="text-align: center;">ADMINISTRAR PROVEEDORES</div>
+        <!-- <app-crear-persona #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-persona>
+        <app-modifica-persona #modalModifica (onSave)="onModificaSave($event)"></app-modifica-persona> -->
+
+      <div style="display:flex;flex-wrap: wrap; justify-content: start;grid-gap: 5px;padding: 5px;">
+
+
+        <button (click)="this.inicializarNuevoRegistro()" class="main-btn-success"><i class="fa-solid fa-plus"></i>Nuevo</button>
+        <button (click)="this.recargarLista(0)" class="main-btn-info"><i class="fa-solid fa-search"></i> Buscar</button>
+
+      </div>
+      <div style="display:flex;flex-wrap: wrap; justify-content: end;grid-gap: 5px;padding: 5px;">
+        <label for="">Buscar</label>
+        <input type="text">
+      </div>
+
+      <table class="table_general">
+        <thead>
+           <th>Razon social</th>
+           <th>Correo</th>
+           <th>Nombre</th>
+           <th>Apellido</th>
+           <th>Celular</th>
+           <th>Nro de colaboradores</th>
+           <th>Accion</th>
+        </thead>
+        <tbody>
+           <tr *ngFor="let a of this.list">
+             <td>{{a.data().razon_social}}</td>
+             <td>{{a.data().correo}}</td>
+             <td>{{a.data().persona?.name}}</td>
+             <td>{{a.data().persona?.lastname}}</td>
+             <td>{{a.data().persona?.phoneNumber}}</td>
+             <td>{{a.data().nro_colaboradores}}</td>
+             <td class="td_acciones">
+               <button (click)="this.clickEditar(a,true)" class="main-btn-info"><i class="fa-solid fa-eye"></i> </button>
+               <button (click)="this.clickEditar(a)" class="main-btn-warning"><i class="fa-solid fa-pen-to-square"></i> </button>
+               <button class="main-btn-danger"><i class="fa-solid fa-trash-can"></i> </button>
+             </td>
+           </tr>
+        </tbody>
+     </table>
+
+
+    </div>
+  </div>
+</div>
+

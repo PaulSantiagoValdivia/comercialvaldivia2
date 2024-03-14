@@ -1,0 +1,66 @@
+<div class="main-modal" *ngIf="this.ver" >
+  <div class="main-modal-contenedor">
+    <div class="main-modal-header">
+      {{isConsulta==false?'Modificar Persona':'Consultar Persona'}}
+    </div>
+    <div class="main-modal-body">
+
+
+      <div style="display:grid;grid-template-columns: auto 1fr; grid-gap: 5px;">
+        <label for="">Nombre</label>
+        <div>
+          <input disabled="{{isConsulta}}" type="text" placeholder="Nombre" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.name">
+        </div>
+
+        <label for="">Apellido</label>
+
+        <div>
+          <input disabled="{{isConsulta}}" type="text" placeholder="Apellidos" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.lastname">
+        </div>
+        <label for="">Celular</label>
+        <div>
+          <input disabled="{{isConsulta}}" type="number" placeholder="celular" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.phoneNumber">
+        </div>
+        <label for="">Rol</label>
+        <div>
+          <select disabled="{{isConsulta}}" name="" id="" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.role">
+            <option value="">Elegir Rol</option>
+            <option *ngFor="let d of this.roles" value="{{d.data().nombre}}">{{d.data().nombre}}</option>
+          </select>
+        </div>
+
+        <label for="">¿Se registro desde la web?</label>
+        <div >
+          <input
+          disabled="true"
+          [(ngModel)]="this.obj.registerWeb"
+          [ngModelOptions]="{standalone: true}"  type="checkbox" role="switch" >
+          <label > {{this.obj.registerWeb?' SI':' NO'}}</label>
+        </div>
+        <label for="">¿Se registro desde el movil?</label>
+        <div class="ml-3">
+          <input
+          disabled="true"
+          [(ngModel)]="this.obj.registerMobile"
+          [ngModelOptions]="{standalone: true}"  type="checkbox" role="switch" >
+          <label > {{this.obj.registerMobile?' SI':' NO'}}</label>
+        </div>
+        <label for="">¿Persona valida?</label>
+        <div class="ml-3">
+          <input
+          disabled="{{isConsulta}}"
+          [(ngModel)]="this.obj.validate"
+          [ngModelOptions]="{standalone: true}"  type="checkbox" role="switch" >
+          <label > {{this.obj.validate?' SI':' NO'}}</label>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="main-modal-footer">
+      <button *ngIf="!isConsulta" (click)="guardar()" class="main-btn-success"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+      <button (click)="ocultar()" class="main-btn-danger"><i class="fa-solid fa-xmark"></i>Cancelar</button>
+    </div>
+  </div>
+
+</div>
