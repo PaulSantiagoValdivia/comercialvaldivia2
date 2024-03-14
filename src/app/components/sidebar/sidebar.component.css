@@ -9,12 +9,9 @@
   display: flex;
   align-items: center;
   width: 100%;
-
-
-
 }
 .sub-menu li.active {
-  background-color: #f6f6f6;
+  background-color: #000;
    border-radius: 10px;
   border-left: 4px solid #fff422; /* Color de borde para resaltar el elemento del submenú activo */
 
@@ -38,7 +35,7 @@
   display: flex;
   gap: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #f6f6f6;
+  border-bottom: 1px solid #434242;
 }
 .user-img {
   width: 44px;
@@ -59,6 +56,7 @@
   margin-bottom: 10px;
 }
 .user-details .name {
+  color: #757575;
   font-size: 14px;
   font-weight: 500;
 }
@@ -115,6 +113,7 @@
 
 .menu ul li .svg2 {
   width: 20px;
+  fill: #434242;
 }
 .menu ul li .text {
   flex: 1;
@@ -153,11 +152,12 @@
   border-bottom: 2px solid var(--body-general-text-color);
 }
 .sub-menu {
-  background-color: #fff;
-  border-radius: 30px;
+  background-color: #111111fc;
+  border-radius: 10px;
   transition: all 0.3s;
   width: 200px;
   height: auto;
+  padding: 5px;
 }
 .menu-btn {
   position: absolute;
@@ -172,8 +172,8 @@
   cursor: pointer;
   color: #757575;
   border: 2px solid #f6f6f6;
-  background-color: #fff;
-  border: 2px solid #a5a5a5;
+  background-color: #000;
+  border: 1px solid #434242;
 
 }
 .menu-btn:hover {
@@ -246,7 +246,6 @@
   left: 0;
   margin-top: -1px;
   width: 97px;
-
   border-radius: 20px;
   padding: 10px 20px;
   border: 1px solid #f6f6f6;
@@ -254,7 +253,7 @@
   box-shadow: 0px 10px 8px var(--body-general-background-color-box-shadow);
 }
 .menu ul li.active-submenu a {
-  background-color: #e0e0e0; /* Cambia el color de fondo del elemento activo */
-  color: #000; /* Cambia el color del texto del elemento activo */
+  background-color: #111111fc; /* Cambia el color de fondo del elemento activo */
+  color: #fff; /* Cambia el color del texto del elemento activo */
 }
 

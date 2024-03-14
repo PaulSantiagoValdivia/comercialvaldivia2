@@ -3,7 +3,7 @@ import { provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from '@angular/fire/compat';
+
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 // import { provideHttpClient } from '@angular/common/http';

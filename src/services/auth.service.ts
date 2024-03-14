@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { log } from 'console';
 
-import { RecaptchaVerifier, signInWithPhoneNumber, getAuth, Auth, } from 'firebase/auth';
+import { RecaptchaVerifier, signInWithPhoneNumber, getAuth, Auth,onAuthStateChanged } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
         throw new Error('Firebase Auth not initialized');
       }
 
-      this.recaptchaVerifier = new RecaptchaVerifier(this.auth,'recaptcha-container', {
+      this.recaptchaVerifier = new RecaptchaVerifier(this.auth, 'recaptcha-container', {
         size: 'invisible'
       });
 
@@ -32,21 +33,20 @@ export class AuthService {
     }
   }
 
-    async verifyCode(verificationCode: string) {
-      try {
-        if (!this.confirmationResult) {
-          throw new Error('No confirmation result available');
-        }
-
-        const userCredential = await this.confirmationResult.confirm(verificationCode);
-        console.log('Usuario autenticado:', userCredential);
-        return userCredential;
-      } catch (error) {
-        console.error('Error al verificar el código de verificación:', error);
-        throw error;
+  async verifyCode(verificationCode: string) {
+    try {
+      if (!this.confirmationResult) {
+        throw new Error('No confirmation result available');
       }
+      const userCredential = await this.confirmationResult.confirm(verificationCode);
+      console.log('Usuario autenticado:', userCredential);
+      return userCredential;
+    } catch (error) {
+      console.error('Error al verificar el código de verificación:', error);
+      throw error;
     }
-  getAuth():Auth{
+  }
+  getAuth(): Auth {
     return this.auth;
   }
 
@@ -61,8 +61,12 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    console.log(this.auth.currentUser);
+    const auth = getAuth();
+    console.log(auth.currentUser);
 
-    return !!this.auth.currentUser;
+    if (auth.currentUser===null) {
+      return false;
+    }
+    return true;
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, CollectionReference,query, where  } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,10 +9,13 @@ export class FirebaseService {
 
   constructor(private firestore: Firestore) { }
 
-  getItems(): Observable<any[]> {
+  getPersonByPhoneNumber(phoneNumber: string): Observable<any[]> {
     const itemCollection = collection(this.firestore, 'PERSONA');
-    return collectionData(itemCollection);
+    const q = query(itemCollection, where('phoneNumber', '==', phoneNumber));
+    return collectionData(q);
   }
+
+
 
  addPerson(person: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {

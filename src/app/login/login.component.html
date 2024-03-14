@@ -1,16 +1,16 @@
-<div class="login-container">
+<div class="login-container" *ngIf="!validate">
   <div class="login-card" *ngIf="!userExist">
-    <p class="sub-title" >Iniciar sesión</p>
+    <p class="sub-title" >Inicias session</p>
     <div class="form-group"  >
       <div class="box" *ngIf="!confirmationResult">
-        <label for="phone">Número de Teléfono:</label>
+        <label for="phone">Utiliza tu número de Teléfono:</label>
         <input type="tel" id="phone" [(ngModel)]="phoneNumber" placeholder="+591">
         <div id="recaptcha-container"></div>
-        <button (click)="sendVerificationCode()">Enviar Código</button>
+        <button (click)="sendVerificationCode()">Enviar codigo de verificacion</button>
       </div>
 
       <div *ngIf="confirmationResult">
-        <label for="verificationCode">Código de Verificación:</label>
+        <label for="verificationCode">Ingresa el código de Verificación:</label>
         <input type="text" id="verificationCode" [(ngModel)]="verificationCode" placeholder="654758">
         <button (click)="verifyCode()">Ingresar</button>
       </div>
@@ -18,14 +18,20 @@
     </div>
   </div>
   <div class="login-card" *ngIf="userExist">
-    <p>El número de teléfono no está registrado en la tabla de personas.</p>
+    <p>Ups! no cuentas con un registro.</p>
     <form (ngSubmit)="registerPerson()">
-      <label for="nombre">Nombre:</label>
+      <label for="nombre">Ingresa tus nombres:</label>
       <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
-      <label for="rol">Rol:</label>
-      <input type="text" id="rol" [(ngModel)]="rol" name="rol">
+      <label for="lastaname">Ingresa tus apellidos:</label>
+      <input type="text" id="lastanme" [(ngModel)]="lastname" name="lastanem">
       <button type="submit">Registrarse</button>
     </form>
   </div>
 </div>
 
+
+<div class="login-container" *ngIf="validate">
+<div class="login-card">
+  <p class="sub-title" >Su cuenta esta esperando a ser validada por CBN. porfavor intente iniciar session mas tarde o comuniquese con el equipo de cbn</p>
+</div>
+</div>

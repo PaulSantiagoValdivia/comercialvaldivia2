@@ -4,71 +4,91 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../services/persona.service';
+import { BaseController } from '../basecontroller';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [ FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   standalone: true
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseController implements OnInit {
   phoneNumber: string = '';
   verificationCode: string = '';
   confirmationResult: boolean = false;
-  userExist:boolean=false;
+  userExist: boolean = false;
+  validate: boolean = false;
   persona: any[] = [];
-  nombre: string = ''; // Agrega la propiedad para el nombre
-  rol: string = ''; // Agrega la propiedad para el rol
-
+  nombre: string = '';
+  lastname: string = '';
+  r: boolean = false;
   constructor(
+    http: HttpClient,
     private authService: AuthService,
     private router: Router,
     private firebaseService: FirebaseService
-  ) {}
-
-  ngOnInit(): void {
-    this.isLoggedIn();
+  ) {
+    super(http);
+  }
+  override ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+    }else{
+      this.router.navigate(['/login']);
+    }
   }
 
   async sendVerificationCode() {
     try {
       await this.authService.sendVerificationCode(this.phoneNumber);
       this.confirmationResult = true;
+      // this.hideLoader();
     } catch (error) {
+      this.hideLoader();
       console.error(error);
     }
   }
 
   async verifyCode() {
     try {
-      await this.authService.verifyCode(this.verificationCode);
+      this.showLoader();
+      await this.authService.verifyCode(this.verificationCode); // Usa el método del servicio AuthService
       this.isLoggedIn();
-      this.confirmationResult = false;
     } catch (error) {
+      this.hideLoader();
       console.error(error);
     }
   }
 
   isLoggedIn() {
-    let r = this.authService.isLoggedIn();
-    if (r) {
-      this.firebaseService.getItems().subscribe((data) => {
-        this.persona = data;
-        const phoneNumberExists = this.persona.some(
-          (person) => person.phoneNumber === this.phoneNumber
-        );
-        if (phoneNumberExists) {
-          console.log('El número de teléfono existe en la tabla de personas.');
+    try {
+      this.showLoader();
+      this.firebaseService.getPersonByPhoneNumber(this.phoneNumber).subscribe((data) => {
+        if (data.length > 0) {
+          const user = data[0];
+          if (user.validate) {
+            this.hideLoader();
+            this.router.navigate(['/']);
+            console.log('El número de teléfono existe en la tabla de personas y la cuenta está validada.');
+          } else {
+            console.log('La cuenta está esperando a ser validada.');
+            this.hideLoader();
+            this.validate = true;
+          }
         } else {
           console.log('El número de teléfono no existe en la tabla de personas.');
-          this.userExist= true;
+          this.userExist = true;
+          this.hideLoader();
         }
       });
-    } else {
-      this.router.navigate(['/login']);
+    } catch (error) {
+      this.hideLoader();
+      console.error('Error al obtener datos:', error);
     }
   }
+
 
   // Método para registrar a la persona si el número de teléfono no está registrado
   registerPerson() {
@@ -80,14 +100,20 @@ export class LoginComponent implements OnInit {
       // Registra a la persona con el formulario de nombre y rol
       const newPerson = {
         phoneNumber: this.phoneNumber,
-        nombre: this.nombre,
-        rol: this.rol,
+        name: this.nombre,
+        lastname: this.lastname,
+        validate: false,
+        registerWeb: true,
+        registerMobile: false,
+        role: '',
       };
       this.firebaseService.addPerson(newPerson).then(() => {
         console.log('Persona registrada exitosamente.');
-        this.userExist=false;
-        // Realiza cualquier acción adicional después de registrar la persona
-    }).catch(error => {
+        this.userExist = false;
+        this.confirmationResult = false;
+        this.isLoggedIn();
+
+      }).catch(error => {
         console.error('Error al registrar la persona:', error);
       });
     } else {

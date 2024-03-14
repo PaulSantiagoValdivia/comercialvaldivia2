@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "testauth-293c3"
+    "default": "test-cbntrade",
+    "cbn": "test-cbntrade"
   },
   "targets": {
     "testauth-293c3": {

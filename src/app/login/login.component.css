@@ -3,11 +3,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f2f4f8; /* Soft background color */
+  background-color: #000; /* Soft background color */
 }
 
 .login-card {
-  background: #FFFFFF;
+  background: #000;
   padding: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
@@ -17,7 +17,7 @@
 }
 
 .title{
-  color: #000;
+  color: hsl(0, 0%, 100%);
   font-family: Poppins;
   font-size: 22px;
   font-style: normal;
@@ -25,13 +25,13 @@
   line-height: normal;
 }
 .sub-title{
-  color: #4D4C4C;
 font-family: Poppins;
-font-size: 18px;
+color: #fff;
+
+font-size: 22px;
 font-style: normal;
-font-weight: 500;
-line-height: normal;
-  padding: 20px;
+font-weight: 900;
+line-height: 36px;
 }
 .logo {
   width: 120px; /* Adjust as needed */
@@ -46,20 +46,18 @@ label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #FFF;
+  background-color: #000000;
 
   font-family: Poppins;
 
   /* Cambiar al color de fondo de cabecera deseado */
-  color: #808080;
+  color: #979797;
   /* Cambiar al color del texto deseado */
   font-weight: bold;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-
-
 }
 input[type="tel"],
 input[type="text"] {
@@ -67,12 +65,15 @@ input[type="text"] {
   font-family: Poppins;
   padding: 10px 20px;
   font-size: 14px;
-  border: 1px solid #dcdfe6; /* Subtle border color */
-  border-radius: 8px; /* Match button border-radius */
+  border-color: rgb(25, 25, 29);
+  border-radius: var(--radius-minimal, 4px);
+  border: 1px solid #1e1e1e;
   margin-top: 0.5rem;
+  color: #979797;
 outline: none; /* Larger font size for readability */
 text-align: center;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 4px 4px 0 rgba(0,0,0,.25);
+background-color: #000;
 }
 
 button {
@@ -80,18 +81,20 @@ button {
   padding: 0.75rem;
   border: none;
   border-radius: 5px;
-  background: #FFC000 0% 0% no-repeat padding-box;
-  color: #808080;
+  background: linear-gradient(102.81deg, #ffdd31, #f3900d);
+  color: #000;
   cursor: pointer;
   font-size: 1rem; /* Larger font size for readability */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  transition: background-color 1s ease; /* Smooth transition for hover effect */
   margin-top: 50px;
   font-weight: 600;
 }
 
 button:hover {
-  background-color: #f0b400; /* Darker shade on hover */
+  background: linear-gradient(102.81deg, #f3900d, #ffdd31);
+  transition: background-color 1s ease; /* Smooth transition for hover effect */
 }
+
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
