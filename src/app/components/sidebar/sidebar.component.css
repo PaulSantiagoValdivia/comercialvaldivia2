@@ -5,18 +5,15 @@
   font-family: "Inter", sans-serif;
 }
 body {
-  background-color: #dbe2f4;
+  background-color: #000;
 }
 .container {
   display: flex;
   align-items: center;
   width: 100%;
-
-
-
 }
 .sub-menu li.active {
-  background-color: #f6f6f6;
+  background-color: #000;
    border-radius: 10px;
   border-left: 4px solid #fff422; /* Color de borde para resaltar el elemento del submenú activo */
 
@@ -29,18 +26,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: #fff;
+  background-color: #000;
   padding: 24px;
   border-radius: 0px 30px 30px 0px;
   transition: all 0.3s;
-  border: 1px solid #cac2c2;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 .sidebar .head {
   display: flex;
   gap: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #f6f6f6;
+  border-bottom: 1px solid #434242;
 }
 .user-img {
   width: 44px;
@@ -61,6 +57,7 @@ body {
   margin-bottom: 10px;
 }
 .user-details .name {
+  color: #757575;
   font-size: 14px;
   font-weight: 500;
 }
@@ -109,13 +106,14 @@ body {
 }
 
 .menu ul li > a:hover{
-  color: #000;
-  background-color: #f6f6f6;
-   box-shadow: 0 0 0 0.2rem #C7D2FE;
+  color: #fff;
+  background-color: #000;
+  box-shadow: 0 0 0 0.1rem #fff422;
 }
 
 .menu ul li .svg2 {
   width: 20px;
+  fill: #434242;
 }
 .menu ul li .text {
   flex: 1;
@@ -151,14 +149,15 @@ body {
 .menu:not(:last-child) {
   padding-bottom: 10px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #f6f6f6;
+  border-bottom: 1px solid #434242;
 }
 .sub-menu {
-  background-color: #fff;
-  border-radius: 30px;
+  background-color: #111111fc;
+  border-radius: 10px;
   transition: all 0.3s;
   width: 200px;
   height: auto;
+  padding: 5px;
 }
 .menu-btn {
   position: absolute;
@@ -173,8 +172,8 @@ body {
   cursor: pointer;
   color: #757575;
   border: 2px solid #f6f6f6;
-  background-color: #fff;
-  border: 2px solid #a5a5a5;
+  background-color: #000;
+  border: 1px solid #434242;
 
 }
 .menu-btn:hover {
@@ -247,15 +246,13 @@ body {
   left: 0;
   margin-top: -1px;
   width: 97px;
-
   border-radius: 20px;
-  padding: 10px 20px;
-  border: 1px solid #f6f6f6;
-  background-color: #fff;
+  padding: 5px ;
+  background-color: #111111fc;
   box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
 }
 .menu ul li.active-submenu a {
-  background-color: #e0e0e0; /* Cambia el color de fondo del elemento activo */
-  color: #000; /* Cambia el color del texto del elemento activo */
+  background-color: #111111fc; /* Cambia el color de fondo del elemento activo */
+  color: #fff; /* Cambia el color del texto del elemento activo */
 }
 
