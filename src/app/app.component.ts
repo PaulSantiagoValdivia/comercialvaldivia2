@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -13,8 +11,6 @@ import { RouterOutlet } from '@angular/router';
 
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {}
-
   ngOnInit(): void {
 
     // Verificar si el usuario está autenticado al cargar la aplicación
@@ -22,6 +18,7 @@ export class AppComponent implements OnInit {
     //    // Si el usuario no está autenticado, redirigir a la página de inicio de sesión
     //    this.router.navigate(['/login']);
     //  }
+
 
   }
 }
