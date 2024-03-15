@@ -1,4 +1,3 @@
-
 <div class="home-container">
   <app-sidebar></app-sidebar>
   <div class="main-content">
@@ -7,14 +6,18 @@
     <div class="content">
       <!-- <h3 style="text-align: center;">ADMINISTRAR PERSONAS</h3> -->
       <div style="text-align: center;">ADMINISTRAR PERSONAS</div>
-        <app-crear-persona #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-persona>
-        <app-modifica-persona #modalModifica (onSave)="onModificaSave($event)"></app-modifica-persona>
+      <app-crear-persona #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-persona>
+      <app-modifica-persona #modalModifica (onSave)="onModificaSave($event)"></app-modifica-persona>
 
       <div style="display:flex;flex-wrap: wrap; justify-content: start;grid-gap: 5px;padding: 5px;">
 
 
-        <button (click)="this.inicializarNuevoRegistro()" class="main-btn-success"><i class="fa-solid fa-plus"></i>Nuevo</button>
-        <button (click)="this.recargarLista(0)" class="main-btn-info"><i class="fa-solid fa-search"></i> Buscar</button>
+        <p-button class="mr-2" (click)="this.inicializarNuevoRegistro()" label="Nuevo" icon="fa-solid fa-plus" severity="success"></p-button>
+      <p-button (click)="this.recargarLista(0)" label="Buscar" icon="fa-solid fa-search" severity="info"></p-button>
+<!--
+        <button (click)="this.inicializarNuevoRegistro()" class="main-btn-success"><i
+            class="fa-solid fa-plus"></i>Nuevo</button>
+        <button (click)="this.recargarLista(0)" class="main-btn-info"><i class="fa-solid fa-search"></i> Buscar</button> -->
 
       </div>
       <div style="display:flex;flex-wrap: wrap; justify-content: end;grid-gap: 5px;padding: 5px;">
@@ -22,7 +25,7 @@
         <input type="text">
       </div>
 
-
+      <!--
         <table class="table_general">
            <thead>
               <th>Nombres</th>
@@ -49,11 +52,62 @@
                 </td>
               </tr>
            </tbody>
-        </table>
-        <div>
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="1" [rows]="this.size_page" [totalRecords]="this.total_register" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-        </div>
+        </table> -->
+
+
+      <p-table #dt [value]="this.list" responsiveLayout="scroll" [rows]="this.size_page"
+        [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="false"
+        [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="single"
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Celular</th>
+            <th>Valido</th>
+            <th>Rol</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-table_item>
+          <tr [pSelectableRow]="table_item">
+            <!-- <td>
+                            <p-tableCheckbox [value]="table_item"></p-tableCheckbox>
+                        </td> -->
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
+              {{table_item.data().name}}
+            </td>
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
+              {{table_item.data().lastname}}
+            </td>
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
+              {{table_item.data().phoneNumber}}
+            </td>
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
+              <p-badge *ngIf="table_item.data().validate" [value]="'Si'" severity="success"></p-badge>
+              <p-badge *ngIf="!table_item.data().validate"  [value]="'No'" severity="danger"></p-badge>
+            </td>
+            <td style="width:14%; min-width:5rem;"><span class="p-column-title">Nombre</span>
+              {{table_item.data().role}}
+            </td>
+            <td style="width: 14%; min-width:12rem;"><span class="p-column-title">Nombre</span>
+              <p-button (click)="this.clickEditar(table_item,true)" icon="fa-solid fa-eye" [rounded]="true" severity="info" [outlined]="true"></p-button>
+              <p-button (click)="this.clickEditar(table_item,false)" icon="fa-solid fa-pen-to-square" [rounded]="true" severity="warning" [outlined]="true"></p-button>
+              <p-button icon="fa-solid fa-trash-can" [rounded]="true" severity="danger" [outlined]="true"></p-button>
+
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+
+      <div>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="1" [rows]="this.size_page"
+          [totalRecords]="this.total_register" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+      </div>
+
+
     </div>
   </div>
 </div>
-

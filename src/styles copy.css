@@ -1,13 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "primeng/resources/primeng.css";
-@import 'primeflex/primeflex.scss';
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/themes/lara-dark-blue/theme.css" screen and (prefers-color-scheme: dark);
 :root {
 
   --main-color-success:rgb(0, 114, 25);
-  --main-color-danger:rgb(116, 32, 32);
+  --main-color-danger:rgb(199, 43, 43);
   --main-color-warning:rgb(209, 159, 20);
   --main-color-info:rgb(26, 65, 170);
 
@@ -25,7 +24,7 @@
   --body-general-text-color:rgb(0, 0, 0);
   --main-text-label-color:#4e4e4e;
   --main-text-label-color2:#222222;
-  --main-font-size:0.8rem!important;
+  --main-font-size:1.1rem;
 }
 @media (prefers-color-scheme: dark) {
 
@@ -37,35 +36,44 @@
 
     --main-table_header:rgb(255, 199, 46);
     --main-table_header_text_color:rgb(27, 27, 27);
-    --body-general-background-color:#313131;
-    --body-general-background-color2: #353535;
-    --body-general-background-color3: #4b4b4b;
-    --body-general-background-color4: #868686;
-    --body-general-background-color-active: #9abeec;
+    --body-general-background-color:#02113a;
+    --body-general-background-color2: #061b5f;
+    --body-general-background-color3: #0a3977;
+    --body-general-background-color4: #143797;
+    --body-general-background-color-active: #4b95f5;
     --body-general-text-color-active: #000000;
-    --body-general-background-color-box-shadow: #98b4ff;
+    --body-general-background-color-box-shadow: #5d84f0;
     --main-modal-background:var(--body-general-background-color2);
     --main-modal-header:var(--body-general-background-color);
     --body-general-text-color:rgb(255, 255, 255);
     --main-text-label-color:#cccccc;
     --main-text-label-color2:#f1f1f1;
-
+    --main-font-size:1.1rem;
   }
 }
-.p-component{
-  font-size: 0.9rem;
+body{
+  margin: 0;
+  font-family: sans-serif;
+  font-size: var(--main-font-size);
+  color:var(--body-general-text-color) ;
+  background-color: var(--body-general-background-color);
 }
-.p-datatable .p-datatable-tbody > tr > td{
-  padding-top: 0.1rem ;
-  padding-bottom: 0.1rem ;
+input[type="text"]
+{
+  font-size: var(--main-font-size);
 }
-.p-button{
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+input[type="number"]
+{
+  font-size: var(--main-font-size);
 }
+input[type="mail"]
+{
+  font-size: var(--main-font-size);
+}
+
 .main-modal {
   position: fixed;
-  z-index: 100;
+  z-index: 400;
   top: 0;
   left: 0;
   width: 100%;
@@ -76,6 +84,8 @@
     background: radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0, .8));
 
   background: -webkit-radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0,.8));
+
+
 
 }
 .main-modal-contenedor{
@@ -99,12 +109,138 @@ padding: 5px;
 .main-modal-body{
   padding: 10px;
 }
-
+.main-modal-contenedor label{
+  color:var(--main-text-label-color);
+  padding: 2px;
+}
+.main-modal-contenedor input, select{
+  border-radius: 10px;
+  background-color: var(--body-general-background-color);
+  border-style: solid;
+  border-color: var(--body-general-text-color);
+  color: var(--body-general-text-color);
+  border-width: 1px;
+  padding: 2px;
+}
 .main-modal-footer{
   padding: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: end;
+
+}
+.main-btn-info{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-info);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-info{
+  border-radius: 5px;
+  color: var(--main-color-info);
+  padding: 5px;
+  background-color: var(--body-general-background-color);
+  border-color: var(--main-color-info);
+  border-style: solid;
+  transition: all ease-out 0.1s;
+}
+.main-btn-info:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.main-btn-success{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-success);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-success{
+  border-radius: 5px;
+  color: var(--main-color-success);
+  padding: 5px;
+  border-color: var(--main-color-success);
+  background-color: var(--body-general-background-color);
+  border-style: solid;
+  transition: all ease-out 0.1s;
+}
+.main-btn-success:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.main-btn-warning{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-warning);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-warning:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+
+
+.main-btn-warning{
+  border-radius: 5px;
+  color: var(--main-color-warning);
+  padding: 5px;
+  background-color: var(--body-general-background-color);
+  border-style: solid;
+  border-color: var(--main-color-warning);
+  transition: all ease-out 0.1s;
+}
+
+.main-btn-danger{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-danger);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-btn-danger{
+  border-radius: 5px;
+  color: var(--main-color-danger);
+  padding: 5px;
+  background-color: var(--body-general-background-color);
+  border-color: var(--main-color-danger);
+  border-style: solid;
+  transition: all ease-out 0.1s;
+}
+.main-btn-danger:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.main-badge-success{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-success);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-badge-danger{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: var(--main-color-danger);
+  border-style: none;
+  transition: all ease-out 0.1s;
+}
+.main-badge-warning{
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  padding: 2px;
+  background-color: var(--main-color-warning);
+  border-style: none;
+  transition: all ease-out 0.1s;
 }
 
 
@@ -132,57 +268,41 @@ flex: 1;
 padding: 10px;
 }
 
+ .btn-guardar{
 
-.main-btn-info{
-  border-radius: 5px;
-  color: var(--main-color-info);
-  padding: 5px;
-  background-color: var(--body-general-background-color);
-  border-color: var(--main-color-info);
-  border-style: solid;
-  transition: all ease-out 0.1s;
+ }
+.table_general thead{
+
 }
-.main-btn-info:hover{
-  cursor: pointer;
-  transform: scale(1.05);
+.table_general td, .table_general th {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
 }
 
-.main-btn-success{
-  border-radius: 5px;
-  color: var(--main-color-success);
-  padding: 5px;
-  border-color: var(--main-color-success);
-  background-color: var(--body-general-background-color);
-  border-style: solid;
-  transition: all ease-out 0.1s;
+.table_general th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-table_header);
+  color: var(--main-table_header_text_color);
+  font-weight: bold;
 }
-.main-btn-success:hover{
-  cursor: pointer;
-  transform: scale(1.05);
+.table_general td {
+
+
+
 }
-.main-btn-warning{
-  border-radius: 5px;
-  color: var(--main-color-warning);
-  padding: 5px;
-  background-color: var(--body-general-background-color);
-  border-style: solid;
-  border-color: var(--main-color-warning);
-  transition: all ease-out 0.1s;
+.table_general {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
-.main-btn-warning:hover{
-  cursor: pointer;
-  transform: scale(1.05);
-}
-.main-btn-danger{
-  border-radius: 5px;
-  color: var(--main-color-danger);
-  padding: 5px;
-  background-color: var(--body-general-background-color);
-  border-color: var(--main-color-danger);
-  border-style: solid;
-  transition: all ease-out 0.1s;
-}
-.main-btn-danger:hover{
-  cursor: pointer;
-  transform: scale(1.05);
+
+.table_general tr{background-color: var(--body-general-background-color3);}
+.table_general tr:nth-child(even){background-color: var(--body-general-background-color2);}
+
+.table_general tr:hover {background-color: var(--body-general-background-color4);}
+.table_general .td_acciones{
+  display:flex;
+  grid-gap: 5px;
 }

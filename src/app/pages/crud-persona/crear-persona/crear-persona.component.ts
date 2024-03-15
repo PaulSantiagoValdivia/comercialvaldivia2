@@ -5,14 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { BaseController } from '../../../basecontroller';
 import { HttpClient } from '@angular/common/http';
 import { RolService } from '../../../services/rol.service';
-
-
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-crear-persona',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,InputNumberModule,
+    InputTextModule,DropdownModule,CheckboxModule,ButtonModule
+  ],
   templateUrl: './crear-persona.component.html',
-  styleUrl: './crear-persona.component.css'
+  styleUrl: './crear-persona.component.css',
+  providers: []
 })
 export class CrearPersonaComponent extends BaseController{
   ver=false;
@@ -20,7 +26,9 @@ export class CrearPersonaComponent extends BaseController{
   @Output() onSave=new EventEmitter<any>();
 
   roles:any=[];
-  constructor(public personaService:PersonaService,private http:HttpClient,private roleService:RolService){
+  constructor(public personaService:PersonaService,private http:HttpClient,
+    private roleService:RolService,
+    ){
     super(http);
     this.inicializar();
   }
@@ -47,10 +55,15 @@ export class CrearPersonaComponent extends BaseController{
       );
     this.hideLoader();
     this.onSave.emit(doc);
+    this.showToastSuccess("Guardado correctamente");
+    //Swal.
+    //this.messageService.add({severity: 'success', summary:  'Guardado', detail: 'Correcto.' });
     this.ocultar();
+
 
     //alert("Guardando correctamente");
     }catch(error){
+      this.showError("Ups","Ocurrio un problema, disculpas por favor.");
       console.log(error);
       this.hideLoader();
     }

@@ -98,6 +98,7 @@ export class PersonaService {
     let d:any={
       total_register:snapshot.data().count,
       data:[]};
+
     result.forEach((doc)=>{d.data.push(doc);})
     return d;
 

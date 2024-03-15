@@ -5,11 +5,17 @@ import { BaseController } from '../../../basecontroller';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RolService } from '../../../services/rol.service';
-
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-modifica-persona',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,ButtonModule,CheckboxModule,
+    InputNumberModule,
+    InputTextModule,
+  ],
   templateUrl: './modifica-persona.component.html',
   styleUrl: './modifica-persona.component.css'
 })
@@ -43,10 +49,12 @@ export class ModificaPersonaComponent extends BaseController{
     this.hideLoader();
     this.onSave.emit(doc);
     //this.ocultar();
-
+    this.showToastSuccess("Guardado correctamente");
     //alert("Guardando correctamente");
     }catch(error){
+
       console.log(error);
+      this.showError("Ups","Ocurrio un problema, disculpas por favor.");
       this.hideLoader();
     }
   }

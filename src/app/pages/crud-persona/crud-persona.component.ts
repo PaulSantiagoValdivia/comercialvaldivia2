@@ -19,6 +19,9 @@ import { QueryDocumentSnapshot, setDoc } from '@firebase/firestore';
 import { CrearPersonaComponent } from './crear-persona/crear-persona.component';
 import { ModificaPersonaComponent } from './modifica-persona/modifica-persona.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { BadgeModule } from 'primeng/badge';
 //import { Firestore, addDoc, collection, getDocs, query } from '@angular/fire/firestore';
 @Component({
   standalone: true,
@@ -26,7 +29,9 @@ import { PaginatorModule } from 'primeng/paginator';
   templateUrl: './crud-persona.component.html',
   styleUrl: './crud-persona.component.css',
   imports: [ /*FormsModule,*/ CommonModule, SidebarComponent,
-  CrearPersonaComponent,ModificaPersonaComponent,PaginatorModule ],
+  CrearPersonaComponent,ModificaPersonaComponent,PaginatorModule,TableModule,ButtonModule,
+  BadgeModule
+],
   providers: [PersonaService],
 })
 @Injectable({
@@ -128,7 +133,7 @@ export class CrudPersona extends BaseController{
       this.current_page=page;
       this.list=[];
       try{
-        this.showLoader();
+      this.showLoader();
       let data=await this.personaService.getListPaginate(this.current_page,this.size_page);
       console.log("lista conseguida");
       console.log(data);

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 //import { ModalEstudianteComponent } from './modal-estudiante/modal-estudiante.component';
 //import Swal from 'sweetalert2';
 
@@ -183,6 +184,55 @@ export class BaseController {
     }
     }
     return newString;
+    }
+
+    showToastError(_msg:any){
+      let Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "info",
+        title: _msg
+      });
+    }
+    showToastSuccess(_msg:any){
+      let Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: _msg
+      });
+    }
+    showSuccess(title:any,text:any){
+      Swal.fire({
+        title,
+        text,
+        icon: "success"
+      });
+    }
+    showError(title:any,text:any){
+      Swal.fire({
+        title,
+        text,
+        icon: "error"
+      });
     }
 
 }
