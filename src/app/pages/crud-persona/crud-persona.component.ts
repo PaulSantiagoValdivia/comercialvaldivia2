@@ -72,9 +72,10 @@ export class CrudPersona extends BaseController{
 //   }
 // ]
   list:any=[];
-   size_page=7;
+   size_page=6;
    total_register=0;
    current_page=0;
+   filter_text="";
   //firestore: Firestore = inject(Firestore);
     constructor(private router: Router,httpClient: HttpClient,private authService: AuthService
       ,public personaService:PersonaService
@@ -124,6 +125,10 @@ export class CrudPersona extends BaseController{
 
 
     }
+    async buscar(){
+      console.log(this.filter_text);
+      await this.personaService.buscar(this.filter_text);
+    }
 
     async inicializar(){
       // await this.personaService.createRobot("robot","rojo","20");
@@ -134,7 +139,7 @@ export class CrudPersona extends BaseController{
       this.list=[];
       try{
       this.showLoader();
-      let data=await this.personaService.getListPaginate(this.current_page,this.size_page);
+      let data=await this.personaService.getListPaginate(this.current_page,this.size_page,this.filter_text);
       console.log("lista conseguida");
       console.log(data);
       this.list=data.data;

@@ -56,8 +56,8 @@
   font-size: 0.9rem;
 }
 .p-datatable .p-datatable-tbody > tr > td{
-  padding-top: 0.1rem ;
-  padding-bottom: 0.1rem ;
+  padding-top: 0.01rem ;
+  padding-bottom: 0.01rem ;
 }
 .p-button{
   padding-top: 0.5rem;

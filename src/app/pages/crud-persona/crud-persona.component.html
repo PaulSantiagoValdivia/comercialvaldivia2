@@ -13,7 +13,7 @@
 
 
         <p-button class="mr-2" (click)="this.inicializarNuevoRegistro()" label="Nuevo" icon="fa-solid fa-plus" severity="success"></p-button>
-      <p-button (click)="this.recargarLista(0)" label="Buscar" icon="fa-solid fa-search" severity="info"></p-button>
+      <!-- <p-button (click)="this.recargarLista(0)" label="Buscar" icon="fa-solid fa-search" severity="info"></p-button> -->
 <!--
         <button (click)="this.inicializarNuevoRegistro()" class="main-btn-success"><i
             class="fa-solid fa-plus"></i>Nuevo</button>
@@ -21,8 +21,12 @@
 
       </div>
       <div style="display:flex;flex-wrap: wrap; justify-content: end;grid-gap: 5px;padding: 5px;">
-        <label for="">Buscar</label>
-        <input type="text">
+          <!-- <label for="">Buscar</label>
+        <button (click)="this.buscar()"> buscar</button> -->
+        <input type="text" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.filter_text">
+        <p-button (click)="this.recargarLista(0)" label="" icon="fa-solid fa-search" severity="info"></p-button>
+
       </div>
 
       <!--
