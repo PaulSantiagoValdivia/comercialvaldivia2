@@ -219,18 +219,6 @@ padding: 10px;
   height: 100vh; /* Ajusta la altura de la pantalla */
 
 }
-.content{
-
-  margin: 0 auto;
-  padding: 30px;
-  background-color: #ffffff !important;
-  width: 90%;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-  margin-top: 12px;
-  height: 85vh;
-  border-radius: 70px;
-  color: rgb(0, 0, 0);
-}
 .main-content {
 flex: 1;
 padding: 10px;

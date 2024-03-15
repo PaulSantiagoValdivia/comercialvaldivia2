@@ -8,6 +8,6 @@ import { CrudProveedorComponent } from './pages/crud-proveedor/crud-proveedor.co
 export const routes: Routes = [
   { path: 'login', component: LoginComponent }, // Página de inicio de sesión
   { path: '', component: HomeComponent, canActivate: [AuthGuard] }, // Página de inicio protegida por el guardia de autenticación
-  { path: 'persona', component: CrudPersona, canActivate: [AuthGuard] }, // Otras rutas protegidas por el guardia de autenticación
+  { path: 'persona', component: CrudPersona}, // Otras rutas protegidas por el guardia de autenticación
   { path: 'proveedor', component: CrudProveedorComponent, canActivate: [AuthGuard] },
 ];
