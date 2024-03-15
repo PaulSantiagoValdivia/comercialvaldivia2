@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router ,NavigationEnd} from '@angular/router';
 
 
 @Component({
@@ -18,9 +18,12 @@ export class SidebarComponent implements OnInit {
 
   }
   ngOnInit() {
-
-
-
+    this.loadSidebarState(); // Cargar el estado de la barra lateral al inicializar el componente
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.saveSidebarState(); // Guardar el estado de la barra lateral al cambiar de página
+      }
+    });
   }
   activeSubMenuItemIndex: number | null = null; // Variable para mantener el índice del elemento de submenú activo
 
@@ -40,15 +43,13 @@ export class SidebarComponent implements OnInit {
     iconClass: '/assets/add.svg',
       subMenuItems: [
         { text: 'Users' },
-        { text: 'Subscribers' }
-      ]
-    },
-    {
-      text: 'Persona',
-      iconClass: '/assets/add.svg',
-      subMenuItems: null,
-      url:"./#/persona"
-    },
+        {
+          text: 'Persona',
+          iconClass: '/assets/add.svg',
+          subMenuItems: null,
+          url:"./#/persona"
+        },
+
     {
       text: 'Proveedor',
       iconClass: '/assets/add.svg',
@@ -56,6 +57,9 @@ export class SidebarComponent implements OnInit {
       url:"./#/proveedor"
 
     },
+      ]
+    },
+
     {
       text: 'Schedules',
       iconClass: '/assets/add.svg',
@@ -120,5 +124,24 @@ export class SidebarComponent implements OnInit {
     }).catch((error) => {
       console.error('Error al cerrar sesión:', error);
     });
+  }
+  private saveSidebarState(): void {
+    localStorage.setItem('sidebarState', JSON.stringify({
+      sidebarActive: this.sidebarActive,
+      activeSubMenu: this.activeSubMenu,
+      activeSubMenuItemIndex:this.activeSubMenuItemIndex
+      // Puedes agregar más variables de estado si es necesario
+    }));
+  }
+
+  private loadSidebarState(): void {
+    const storedState = localStorage.getItem('sidebarState');
+    if (storedState) {
+      const parsedState = JSON.parse(storedState);
+      this.sidebarActive = parsedState.sidebarActive;
+      this.activeSubMenu = parsedState.activeSubMenu;
+     this. activeSubMenuItemIndex=parsedState.activeSubMenuItemIndex
+      // Puedes cargar más variables de estado si es necesario
+    }
   }
 }

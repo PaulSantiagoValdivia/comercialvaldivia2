@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { log } from 'console';
 
-import { RecaptchaVerifier, signInWithPhoneNumber, getAuth, Auth,onAuthStateChanged } from 'firebase/auth';
+import { RecaptchaVerifier, signInWithPhoneNumber, getAuth, Auth,onAuthStateChanged,User, browserLocalPersistence } from 'firebase/auth';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +13,27 @@ export class AuthService {
   private auth: Auth;
   private recaptchaVerifier: RecaptchaVerifier | undefined;
   private confirmationResult: any;
+  private userSubject: BehaviorSubject<User | null>;
 
-  constructor() {
+  constructor( private router: Router) {
     this.auth = getAuth();
+
+    this.userSubject = new BehaviorSubject<User | null>(null);
+    this.auth.setPersistence(browserLocalPersistence);
+
+    onAuthStateChanged(this.auth, user => {
+      this.userSubject.next(user);
+      if (user) {
+        // Si el usuario está autenticado, no redirigir al inicio de sesión
+        // en lugar de eso, puedes redirigirlo a la página que estaba intentando acceder
+        // antes de que se le pidiera iniciar sesión, o a la página principal, por ejemplo.
+        // En este caso, lo redirigiremos a la página principal.
+        this.router.navigate(['/']);
+      } else {
+        // Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   async sendVerificationCode(phoneNumber: string) {
@@ -61,12 +82,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const auth = getAuth();
-    console.log(auth.currentUser);
-
-    if (auth.currentUser===null) {
-      return false;
-    }
-    return true;
+    const currentUser = this.userSubject.value;
+  console.log(this.userSubject);
+    return !!currentUser;
   }
 }
