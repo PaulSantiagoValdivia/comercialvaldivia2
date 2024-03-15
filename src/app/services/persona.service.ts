@@ -57,8 +57,11 @@ export class PersonaService {
     // const q = query(collection(this.firestore, "PERSONA")
     // , where("capital", "==", true));
     const q = query(collection(this.firestore, this.collection_name));
-
-    return await getDocs(q);
+    let result=await getDocs(q);
+    let data:any=[]
+    result.forEach((doc)=>{data.push(doc);})
+    return data;
+   // return await getDocs(q);
   }
   async getListPaginate(current_page:any,size:any){
 
