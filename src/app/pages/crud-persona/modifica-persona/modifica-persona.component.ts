@@ -48,9 +48,7 @@ export class ModificaPersonaComponent extends BaseController{
       this.obj.phoneNumber,this.obj.role,this.obj.registerMobile,this.obj.registerWeb,this.obj.validate);
     this.hideLoader();
     this.onSave.emit(doc);
-    //this.ocultar();
     this.showToastSuccess("Guardado correctamente");
-    //alert("Guardando correctamente");
     }catch(error){
 
       console.log(error);

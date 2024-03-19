@@ -16,11 +16,8 @@ import { ProveedorService } from '../../services/proveedor.service';
   styleUrl: './crud-proveedor.component.css'
 })
 export class CrudProveedorComponent extends BaseController{
-  list:any=[];
-   size_page=7;
-   total_register=0;
-   current_page=0;
 
+  list:any=[];
    constructor(private router: Router,httpClient: HttpClient,private authService: AuthService
     ,private proveedorService:ProveedorService
     ){

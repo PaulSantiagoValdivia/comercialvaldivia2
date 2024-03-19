@@ -1,0 +1,69 @@
+
+<style>
+  .hover_zone_drop {
+    cursor:pointer;
+    border-style:solid;
+    border-color:#000000;
+  }
+</style>
+
+<p-dialog header=" Modificar" [(visible)]="this.ver" [style]="{width: '50vw'}" [maximizable]="true">
+  <div class="grid pt-4">
+    <div class="col">
+      <span class="p-float-label">
+        <input pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.nombre" />
+        <label for="username">Nombres</label>
+      </span>
+    </div>
+
+    <!-- <span class="p-float-label col">
+      <input pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.lastname" />
+      <label for="username">Apellidos</label>
+    </span> -->
+
+  </div>
+
+  <div class="grid pt-4">
+  <h4>Armar Permisos del Rol</h4>
+  <p-inputGroup>
+    <!-- <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.add_sub_menu_text" pInputText placeholder="SubMenu" /> -->
+    <button type="button" (click)="agregarSubMenu()" pButton icon="fa-solid fa-plus" class="p-button-warning">Agregar Menu</button>
+    </p-inputGroup>
+  <div class="grid pt-4 ">
+    <div class="p-2 border-1 surface-border border-round w-15rem min-h-10rem">
+      <p class="text-center surface-border border-bottom-1">Lista</p>
+      <ul class="list-none flex flex-column gap-2 p-0 m-0">
+          <li *ngFor="let product of list_permisos" class="cursor-move border-round shadow-1" pDraggable (onDragStart)="onStartDrag(product)" (onDragEnd)="onEndDrag(product)">
+             <a href="{{product.url_relative}}">{{product.nombre}}</a>
+              <!-- <p-checkbox label="Es desplegable" [binary]="true" [(ngModel)]="this.product.is_sub_menu"></p-checkbox> -->
+          </li>
+      </ul>
+  </div>
+
+  <div class="p-2 min-w-15rem min-h-30rem drop-column hover_zone_drop" pDroppable  (onDrop)="onDropGral($event)">
+      <p class="text-center surface-border border-bottom-1">Permisos</p>
+      <ul class="list-none flex flex-column gap-2 p-0 m-0"  >
+          <li *ngFor="let p of obj.permisos" class="border-round shadow-1" pDraggable (onDragEnd)="onEndDragRemoveGral(p)">
+            <div *ngIf="!p.is_sub_menu">{{p.nombre}}</div>
+
+           <div *ngIf="p.is_sub_menu" class="p-2 w-15rem min-h-20rem drop-column hover_zone_drop" pDroppable (onDrop)="onDropSub($event,p)">
+                <p class="text-center surface-border border-bottom-1" contenteditable="true" #x (input)="p.nombre = x.innerText">{{p.nombre}}</p>
+                <ul class="list-none flex flex-column gap-2 p-0 m-0"  >
+                    <li *ngFor="let p2 of p.permisos" class=" border-round shadow-1">
+                        {{p2.nombre}}
+                    </li>
+                </ul>
+            </div>
+          </li>
+      </ul>
+  </div>
+</div>
+</div>
+  <ng-template pTemplate="footer">
+    <p-button (click)="guardar()" label="Guardar" icon="fa-solid fa-save" severity="success"></p-button>
+    <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
+</ng-template>
+</p-dialog>
+
+
+

@@ -71,10 +71,7 @@ export class CrudPersona extends BaseController{
 //     region:"Santa cruz",fecha_registro:new Date(),nro_colaboradores:7}
 //   }
 // ]
-  list:any=[];
-   size_page=6;
-   total_register=0;
-   current_page=0;
+list:any=[];
    filter_text="";
   //firestore: Firestore = inject(Firestore);
     constructor(private router: Router,httpClient: HttpClient,private authService: AuthService

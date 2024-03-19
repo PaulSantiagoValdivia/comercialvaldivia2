@@ -23,7 +23,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class BaseController {
+export abstract class BaseController {
   firebaseConfig = {
     apiKey: "AIzaSyDbWH-Nxg2FuR9H1-yk7rjEVY6_XwG9juw",
     authDomain: "test-cbntrade.firebaseapp.com",
@@ -33,6 +33,10 @@ export class BaseController {
     appId: "1:164556829628:web:91ce830488533ef4afb1b9",
     measurementId: "G-H7B0ECN420"
   };
+  //list:any=[];
+  size_page=7;
+  total_register=0;
+  current_page=0;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -234,5 +238,13 @@ export class BaseController {
         icon: "error"
       });
     }
+    automaticParsePhoneNumber(number:any,concat="+591"){
+      if(number==null)return number;
+      if(String(number).substring(0, 1)=="+"){
+        return number;
+      }else{
+        return concat+String(number);
+      }
 
+    }
 }

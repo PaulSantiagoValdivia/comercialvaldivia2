@@ -11,6 +11,7 @@ import { initializeApp } from 'firebase/app';
 import { initializeApp as initializeApp_alias, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore'
+import { provideAnimations } from '@angular/platform-browser/animations';
 
     const firebaseConfig = {
         projectId: "test-cbntrade",
@@ -25,7 +26,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore'
 initializeApp(firebaseConfig);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withHashLocation()),
+  providers: [
+    provideRouter(routes, withHashLocation()),
+    provideAnimations(),//esto es para arreglar browseranimation module
   importProvidersFrom(
     HttpClientModule,
     AngularFirestoreModule
