@@ -28,6 +28,7 @@ export class CrearRolComponent extends ModalBaseController {
  permiso_drag!:Permiso|null;
  add_sub_menu_text!:string;
  type:any;//tipo 1 es nuevo, 2=modifica 3consulta
+ //ULTIMO-----
     constructor(httpclient:HttpClient,private rolService:RolService){
         super(httpclient);
 
