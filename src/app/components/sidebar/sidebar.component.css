@@ -1,14 +1,23 @@
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+body {
+  background-color: #dbe2f4;
+}
 .container {
   display: flex;
   align-items: center;
   width: 100%;
+
 }
 .sub-menu li.active {
-  background-color: var(--body-general-background-color2);
+
    border-radius: 10px;
   border-left: 4px solid #fff422; /* Color de borde para resaltar el elemento del submenú activo */
-
+  background-color: #fff;
 }
 
 .sidebar {
@@ -18,22 +27,18 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-
-  background-color: var(--body-general-background-color);
-
+  background-color: #fff;
   padding: 24px;
   border-radius: 0px 30px 30px 0px;
   transition: all 0.3s;
-  border: 1px solid var(--body-general-background-color3);
-
-  box-shadow: 0px 4px 8px var(--body-general-background-color-box-shadow);
-
+  border: 1px solid #cac2c2;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 .sidebar .head {
   display: flex;
   gap: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--body-general-background-color2);
+  border-bottom: 1px solid #f6f6f6;
 }
 .user-img {
   width: 44px;
@@ -47,16 +52,14 @@
 }
 .user-details .title,
 .menu .title {
-
+  font-size: 10px;
   font-weight: 500;
-  color: var(--main-text-label-color2);
+  color: #757575;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 .user-details .name {
-
   font-size: 14px;
-
   font-weight: 500;
 }
 .nav {
@@ -74,9 +77,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-
+  font-size: 14px;
   font-weight: 500;
-  color: var(--body-general-text-color);
+  color: #757575;
   text-decoration: none;
   padding: 12px 8px;
   border-radius: 8px;
@@ -101,14 +104,40 @@
   display: block;
   margin-top: 10px;
   animation: slideInFromTop 0.5s ease forwards; /* Aplica la animación slideInFromTop */
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 30vh;
+  padding: 5px;
+  background-color: #f6f6f6;
+}
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+  height: 5px;
+  border-radius: 30px;
+  animation: slideInFromTop 0.5s ease forwards;
 }
 
+/* Asa de la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+  background-color: #ffdd31; /* Color de la asa */
+  border-radius: 6px; /* Redondeo de los bordes de la asa */
+}
+
+/* Track de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background: #2c2c2c; /* Color del track */
+  border-radius: 30px;
+}
+
+/* Asa de la barra de desplazamiento al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(102.81deg, #ffdd31, #f3900d);
+  cursor: pointer;
+}
 .menu ul li > a:hover{
-
-  color: var(--body-general-text-color-active);
-  background-color: var(--body-general-background-color-active);
-   box-shadow: 0 0 0 0.2rem  var(--body-general-background-color-box-shadow);
-
+  color: #000;
+  background-color: #fff;
+   box-shadow: 0 0 0 0.2rem #C7D2FE;
 }
 
 .menu ul li .svg2 {
@@ -143,16 +172,15 @@
 }
 .menu .sub-menu li a {
   padding: 10px 8px;
-
+  font-size: 12px;
 }
 .menu:not(:last-child) {
   padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 2px solid #f6f6f6;
-
 }
 .sub-menu {
-  background-color: var(--body-general-background-color);
+  background-color: #fff;
   border-radius: 30px;
   transition: all 0.3s;
   width: 200px;
@@ -176,7 +204,7 @@
 
 }
 .menu-btn:hover {
-  color: var(--body-general-text-color);
+  color: #000;
 }
 .menu-btn .svg{
   width: 20px;
@@ -216,7 +244,7 @@
   transform: translateY(-50%);
   padding: 10px;
   border-radius: 4px;
-  color: var(--body-general-text-color);
+  color: #fff;
   background-color: #000;
   opacity: 0;
   visibility: hidden;
@@ -251,9 +279,34 @@
   border: 1px solid #f6f6f6;
   background-color: #fff;
   box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
-
 }
 .menu ul li.active-submenu a {
   background-color: #e0e0e0; /* Cambia el color de fondo del elemento activo */
   color: #000; /* Cambia el color del texto del elemento activo */
+}
+@media (max-width: 800px) {
+  .sidebar {
+   height: 100%;
+   position: fixed;
+   z-index: 23;
+  }
+  .sidebar.active{
+    height: 82px;
+    width: 80px;
+  }
+
+  .sidebar .head {
+    display: flex;
+    flex-direction: row;
+  }
+  .sidebar.active .head {
+    display: flex;
+    flex-direction: row;
+    border: none;
+  }
+
+  .sidebar.active .nav{
+    display: none;
+  }
+
 }
