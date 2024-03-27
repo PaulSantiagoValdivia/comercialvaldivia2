@@ -8,7 +8,7 @@ import { CrudRolesComponent } from './pages/crud-roles/crud-roles.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent }, // Página de inicio de sesión
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] }, // Página de inicio protegida por el guardia de autenticación
+  { path: '', component: HomeComponent }, // Página de inicio protegida por el guardia de autenticación
   { path: 'persona', component: CrudPersona}, // Otras rutas protegidas por el guardia de autenticación
   { path: 'roles', component: CrudRolesComponent},
   { path: 'proveedor', component: CrudProveedorComponent, canActivate: [AuthGuard] },
