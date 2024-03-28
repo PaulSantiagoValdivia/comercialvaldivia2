@@ -72,7 +72,8 @@ export class LoginComponent extends BaseController implements OnInit {
           const user = data[0];
           if (user.validate) {
             this.hideLoader();
-            this.router.navigate(['/']);
+            // Guardar los datos de la persona en el almacenamiento local
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
             console.log('El número de teléfono existe en la tabla de personas y la cuenta está validada.');
           } else {
             console.log('La cuenta está esperando a ser validada.');
@@ -90,7 +91,6 @@ export class LoginComponent extends BaseController implements OnInit {
       console.error('Error al obtener datos:', error);
     }
   }
-
 
   // Método para registrar a la persona si el número de teléfono no está registrado
   registerPerson() {

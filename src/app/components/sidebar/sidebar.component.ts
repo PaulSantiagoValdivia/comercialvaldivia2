@@ -13,7 +13,7 @@ import { Router ,NavigationEnd} from '@angular/router';
   imports: [ FormsModule, CommonModule ],
 })
 export class SidebarComponent implements OnInit {
-
+  loggedInUser: any;
   constructor( private authService: AuthService, private router: Router  ) {
 
   }
@@ -24,6 +24,11 @@ export class SidebarComponent implements OnInit {
         this.saveSidebarState(); // Guardar el estado de la barra lateral al cambiar de página
       }
     });
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      this.loggedInUser = JSON.parse(storedUser);
+      console.log('Datos del usuario logueado:', this.loggedInUser);
+    }
   }
   activeSubMenuItemIndex: number | null = null; // Variable para mantener el índice del elemento de submenú activo
 
