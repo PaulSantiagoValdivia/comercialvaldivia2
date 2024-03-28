@@ -43,7 +43,10 @@ export class LoginComponent extends BaseController implements OnInit {
   async sendVerificationCode() {
     try {
 
+      this.phoneNumber="+591"+this.phoneNumber;
       console.log("parseado",this.automaticParsePhoneNumber(this.phoneNumber));
+      console.log(this.phoneNumber);
+
       await this.authService.sendVerificationCode(this.automaticParsePhoneNumber(this.phoneNumber));
       this.confirmationResult = true;
       // this.hideLoader();
