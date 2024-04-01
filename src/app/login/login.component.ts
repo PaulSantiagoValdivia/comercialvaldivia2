@@ -33,9 +33,11 @@ export class LoginComponent extends BaseController implements OnInit {
     super(http);
   }
   override ngOnInit(): void {
+
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/']);
     }else{
+      console.log(this.authService.isLoggedIn());
       this.router.navigate(['/login']);
     }
   }
@@ -67,6 +69,7 @@ export class LoginComponent extends BaseController implements OnInit {
     }
   }
 
+
   isLoggedIn() {
     try {
       this.showLoader();
@@ -75,6 +78,7 @@ export class LoginComponent extends BaseController implements OnInit {
           const user = data[0];
           if (user.validate) {
             this.hideLoader();
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
             this.router.navigate(['/']);
             console.log('El número de teléfono existe en la tabla de personas y la cuenta está validada.');
           } else {
@@ -93,7 +97,6 @@ export class LoginComponent extends BaseController implements OnInit {
       console.error('Error al obtener datos:', error);
     }
   }
-
 
   // Método para registrar a la persona si el número de teléfono no está registrado
   registerPerson() {
