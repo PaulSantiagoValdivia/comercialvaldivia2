@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { Router ,NavigationEnd} from '@angular/router';
+import { RolService } from '../../services/rol.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { Router ,NavigationEnd} from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   loggedInUser: any;
-  constructor( private authService: AuthService, private router: Router  ) {
+  userRoles: any;
+  constructor( private authService: AuthService, private router: Router, private rolService: RolService  ) {
 
   }
   ngOnInit() {
@@ -28,7 +30,11 @@ export class SidebarComponent implements OnInit {
     if (storedUser) {
       this.loggedInUser = JSON.parse(storedUser);
       console.log('Datos del usuario logueado:', this.loggedInUser);
+      if (this.loggedInUser.role) {
+        this.getUserRoles(this.loggedInUser.role);
+      }
     }
+
   }
   activeSubMenuItemIndex: number | null = null; // Variable para mantener el índice del elemento de submenú activo
 
@@ -37,57 +43,7 @@ export class SidebarComponent implements OnInit {
   activeSubMenu: number | null = null; // Variable para mantener el submenú activo
   imagenUrl = '/assets/user.jpg';
   svg = '/assets/flecha-pequena-izquierda.svg';
-  mainMenuItems: any[] = [
-    {
-      text: 'Dashboard',
-      iconClass: '/assets/add.svg',
-      subMenuItems: null
-    },
-    {
-      text: 'Audience',
-    iconClass: '/assets/add.svg',
-      subMenuItems: [
-        { text: 'Users' },
-        {
-          text: 'Persona',
-          iconClass: '/assets/add.svg',
-          subMenuItems: null,
-          url:"./#/persona"
-        },
 
-    {
-      text: 'Proveedor',
-      iconClass: '/assets/add.svg',
-      subMenuItems: null,
-      url:"./#/proveedor"
-
-    },
-      ]
-    },
-
-    {
-      text: 'Schedules',
-      iconClass: '/assets/add.svg',
-      subMenuItems: null
-    },
-    {
-      text: 'Income',
-      iconClass: '/assets/add.svg',
-      subMenuItems: [
-        { text: 'Earnings' },
-        { text: 'Funds' },
-        { text: 'Declines' },
-        { text: 'Payouts' }
-      ]
-    },
-    {
-      text: 'Settings',
-      iconClass: '/assets/add.svg',
-      subMenuItems: [
-        { text: 'Settings' }
-      ]
-    }
-  ];
 
   toggleSidebar(): void {
     this.sidebarActive = !this.sidebarActive;
@@ -148,5 +104,17 @@ export class SidebarComponent implements OnInit {
      this. activeSubMenuItemIndex=parsedState.activeSubMenuItemIndex
       // Puedes cargar más variables de estado si es necesario
     }
+  }
+  private getUserRoles(userRole: string): void {
+    this.rolService.getListByUserRole(userRole)
+      .then((roles: any) => {
+        this.userRoles = roles[0].permisos;
+        console.log(this.userRoles[0].permisos);
+
+
+      })
+      .catch((error) => {
+        console.error('Error al obtener los roles del usuario:', error);
+      });
   }
 }
