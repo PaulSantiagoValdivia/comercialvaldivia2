@@ -7,9 +7,11 @@ import { CrudProveedorComponent } from './pages/crud-proveedor/crud-proveedor.co
 import { CrudRolesComponent } from './pages/crud-roles/crud-roles.component';
 
 export const routes: Routes = [
+
   { path: 'login', component: LoginComponent  }, // Página de inicio de sesión
   { path: '', component: HomeComponent , canActivate: [AuthGuard] }, // Página de inicio protegida por el guardia de autenticación
   { path: 'persona', component: CrudPersona, canActivate: [AuthGuard] }, // Otras rutas protegidas por el guardia de autenticación
-  { path: 'rol', component: CrudRolesComponent , canActivate: [AuthGuard] },
+  { path: 'roles', component: CrudRolesComponent , canActivate: [AuthGuard] },
   { path: 'proveedor', component: CrudProveedorComponent, canActivate: [AuthGuard] },
+
 ];

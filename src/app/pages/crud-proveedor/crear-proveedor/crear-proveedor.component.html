@@ -1,0 +1,44 @@
+<style>
+.swal2-container {
+  z-index: 99999999!important;
+}
+  </style>
+
+<p-dialog [modal]="true" appendTo ="body" header=" {{this.type==1?'Registrar ':(this.type==2?'Modificar ':'Consultar ')}}proveedor" [(visible)]="this.ver"
+  [style]="{width: '50vw'}" [maximizable]="true">
+  <div class="grid pt-4">
+    <div class="col">
+      <span class="p-float-label col">
+        <p-inputNumber [disabled]="this.type==3" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.nro_legajo"> </p-inputNumber>
+        <label for="number-input">Nro Legajo</label>
+      </span>
+
+    </div>
+    <div class="col">
+        <label for="">{{this.obj.activo?'Activo':'Inactivo'}}</label>
+        <p-inputSwitch [(ngModel)]="this.obj.activo"></p-inputSwitch>
+    </div>
+    <div class="col">
+    <p-button (click)="abrirPersona()" label="Datos Persona" icon="fa-solid fa-save"
+    severity="success"></p-button>
+    </div>
+  </div>
+  <div class="grid pt-4">
+    <div class="col">
+        <label for="" style="margin-right: 10px;">Persona:</label>
+        <input [disabled]="true" pInputText
+          value="{{this.obj.persona?this.obj.persona.name:''}} {{this.obj.persona?this.obj.persona.lastname:''}}" />
+
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button *ngIf="this.type==1" (click)="guardar()" label="Guardar" icon="fa-solid fa-save"
+      severity="success"></p-button>
+    <p-button *ngIf="this.type==2" (click)="modificar()" label="Modificar" icon="fa-solid fa-save"
+      severity="success"></p-button>
+    <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
+  </ng-template>
+</p-dialog>
+<app-crear-persona #modalNuevoPersona (onSave)="onSavePersona($event)"></app-crear-persona>
+<app-modifica-persona #modalModificaPersona (onSave)="onModificaPersona($event)"></app-modifica-persona>

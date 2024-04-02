@@ -278,3 +278,6 @@ padding: 10px;
   grid-gap: 5px;
 }
 
+.swal2-container {
+  z-index: 99999;
+}

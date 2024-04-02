@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore';
-
+import { addDoc, collection, doc, getDocs, query, updateDoc } from 'firebase/firestore';
 import { Rol } from '../models/rol.model';
 
 @Injectable({
@@ -53,17 +51,4 @@ export class RolService {
     });
     console.log("Eliminado correctamente: ",result,"delete: ",delet);
   }
-
-  async getListByUserRole(userRole: string){
-    const q = query(collection(this.firestore, this.collection_name), where("nombre", "==", userRole));
-    const result = await getDocs(q);
-    let d: Rol[] = [];
-    result.forEach((doc) => {
-      let obj: Rol = Object.setPrototypeOf(doc.data(), Rol.prototype);
-      obj.key = doc.id;
-      d.push(obj);
-    })
-    return d;
-  }
-
 }
