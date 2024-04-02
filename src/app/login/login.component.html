@@ -4,9 +4,12 @@
     <div class="form-group"  >
       <div class="box" *ngIf="!confirmationResult">
         <label for="phone">Utiliza tu número de Teléfono:</label>
-        <input type="tel" id="phone" [(ngModel)]="phoneNumber" placeholder="+591">
+        <div class="phone-input">
+          <img src="/assets/bolivia.png" alt="Bolivia">+591
+          <input type="tel" id="phone" [(ngModel)]="phoneNumber" placeholder="+591">
+        </div>
         <div id="recaptcha-container"></div>
-        <button (click)="sendVerificationCode()">Enviar codigo de verificacion</button>
+        <button (click)="sendVerificationCode()">Enviar código de verificación</button>
       </div>
 
       <div *ngIf="confirmationResult">

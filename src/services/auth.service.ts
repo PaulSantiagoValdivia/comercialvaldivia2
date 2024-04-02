@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { log } from 'console';
+
 
 import { RecaptchaVerifier, signInWithPhoneNumber, getAuth, Auth,onAuthStateChanged,User, browserLocalPersistence } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
@@ -83,7 +83,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const currentUser = this.userSubject.value;
-  console.log(this.userSubject);
     return !!currentUser;
   }
 }
