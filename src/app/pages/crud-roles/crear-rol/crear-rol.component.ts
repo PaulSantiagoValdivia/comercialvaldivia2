@@ -35,12 +35,12 @@ export class CrearRolComponent extends ModalBaseController {
         this.obj={creado:null};
         this.list_permisos=[];
         this.list_permisos?.push(
-          {url_relative:"./rol",nombre:"Rol"},
-          {url_relative:"./persona",nombre:"Persona"},
-          {url_relative:"./mantenimiento",nombre:"Equipos frios"},
-          {url_relative:"./equipos_frios",nombre:"Equipos Calientes"},
-          {url_relative:"./equipo_pesado",nombre:"Equipo Pesados"},
-          {url_relative:"./Proveedores",nombre:"Proveedores"},
+          {url_relative:"./#/roles",nombre:"Rol"},
+          {url_relative:"./#/persona",nombre:"Persona"},
+          {url_relative:"./#/mantenimiento",nombre:"Equipos frios"},
+          {url_relative:"./#/equipos_frios",nombre:"Equipos Calientes"},
+          {url_relative:"./#/equipo_pesado",nombre:"Equipo Pesados"},
+          {url_relative:"./#/proveedor",nombre:"Proveedores"},
 
           );
         console.log("list_permisos");
