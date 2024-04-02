@@ -34,7 +34,7 @@
         <ul class="list-none flex flex-column gap-2 p-0 m-0">
           <li *ngFor="let product of list_permisos" class="cursor-move border-round shadow-1" pDraggable
             (onDragStart)="onStartDrag(product)" (onDragEnd)="onEndDrag(product)">
-            <a href="{{product.url_relative}}">{{product.nombre}}</a>
+            {{product.nombre}}
             <!-- <p-checkbox label="Es desplegable" [binary]="true" [(ngModel)]="this.product.is_sub_menu"></p-checkbox> -->
           </li>
         </ul>

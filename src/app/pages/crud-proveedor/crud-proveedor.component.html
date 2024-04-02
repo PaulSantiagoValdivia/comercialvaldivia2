@@ -1,56 +1,65 @@
-
 <div class="home-container">
   <app-sidebar></app-sidebar>
   <div class="main-content">
     <!-- Contenido principal de tu página aquí -->
-
+    <app-crear-proveedor #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-proveedor>
     <div class="content">
-      <!-- <h3 style="text-align: center;">ADMINISTRAR PERSONAS</h3> -->
       <div style="text-align: center;">ADMINISTRAR PROVEEDORES</div>
-        <!-- <app-crear-persona #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-persona>
-        <app-modifica-persona #modalModifica (onSave)="onModificaSave($event)"></app-modifica-persona> -->
-
       <div style="display:flex;flex-wrap: wrap; justify-content: start;grid-gap: 5px;padding: 5px;">
 
 
-        <button (click)="this.inicializarNuevoRegistro()" class="main-btn-success"><i class="fa-solid fa-plus"></i>Nuevo</button>
-        <button (click)="this.recargarLista(0)" class="main-btn-info"><i class="fa-solid fa-search"></i> Buscar</button>
-
+        <p-button class="mr-2" (click)="this.clickNuevo()" label="Nuevo" icon="fa-solid fa-plus" severity="success"></p-button>
       </div>
       <div style="display:flex;flex-wrap: wrap; justify-content: end;grid-gap: 5px;padding: 5px;">
-        <label for="">Buscar</label>
-        <input type="text">
+          <!-- <label for="">Buscar</label>
+        <button (click)="this.buscar()"> buscar</button> -->
+        <input type="text" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.filter_text">
+        <p-button (click)="this.recargarLista_()" label="" icon="fa-solid fa-search" severity="info"></p-button>
+
       </div>
 
-      <table class="table_general">
-        <thead>
-           <th>Razon social</th>
-           <th>Correo</th>
-           <th>Nombre</th>
-           <th>Apellido</th>
-           <th>Celular</th>
-           <th>Nro de colaboradores</th>
-           <th>Accion</th>
-        </thead>
-        <tbody>
-           <tr *ngFor="let a of this.list">
-             <td>{{a.data().razon_social}}</td>
-             <td>{{a.data().correo}}</td>
-             <td>{{a.data().persona?.name}}</td>
-             <td>{{a.data().persona?.lastname}}</td>
-             <td>{{a.data().persona?.phoneNumber}}</td>
-             <td>{{a.data().nro_colaboradores}}</td>
-             <td class="td_acciones">
-               <button (click)="this.clickEditar(a,true)" class="main-btn-info"><i class="fa-solid fa-eye"></i> </button>
-               <button (click)="this.clickEditar(a)" class="main-btn-warning"><i class="fa-solid fa-pen-to-square"></i> </button>
-               <button class="main-btn-danger"><i class="fa-solid fa-trash-can"></i> </button>
-             </td>
-           </tr>
-        </tbody>
-     </table>
+
+
+      <p-table #dt [value]="getList()" responsiveLayout="scroll" [rows]="this.size_page"
+        [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true"
+        [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="single"
+        [rowHover]="true" dataKey="key">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nro Legajo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-table_item>
+          <tr [pSelectableRow]="table_item">
+            <!-- <td>
+                            <p-tableCheckbox [value]="table_item"></p-tableCheckbox>
+                        </td> -->
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
+              {{table_item.nro_legajo}}
+            </td>
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title"></span>
+              <p-badge *ngIf="table_item.activo" [value]="'Si'" severity="success"></p-badge>
+              <p-badge *ngIf="!table_item.activo"  [value]="'No'" severity="danger"></p-badge>
+            </td>
+            <td style="width: 14%; min-width:12rem;"><span class="p-column-title"></span>
+              <p-button (click)="this.clickEditar(table_item,3)" icon="fa-solid fa-eye" [rounded]="true" severity="info" [outlined]="true"></p-button>
+              <p-button (click)="this.clickEditar(table_item,2)" icon="fa-solid fa-pen-to-square" [rounded]="true" severity="warning" [outlined]="true"></p-button>
+              <p-button (click)="this.clickEliminar(table_item)" icon="fa-solid fa-trash-can" [rounded]="true" severity="danger" [outlined]="true"></p-button>
+
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div>
+        <!-- <p-paginator (onPageChange)="onPageChange($event)" [first]="1" [rows]="this.size_page"
+          [totalRecords]="this.total_register" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator> -->
+      </div>
 
 
     </div>
   </div>
 </div>
-

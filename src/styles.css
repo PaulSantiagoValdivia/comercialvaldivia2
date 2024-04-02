@@ -237,7 +237,9 @@ padding: 10px;
 flex: 1;
 padding: 10px;
 }
-
+.swal2-container {
+  z-index: 99999;
+}
  .btn-guardar{
 
  }
@@ -276,3 +278,6 @@ padding: 10px;
   grid-gap: 5px;
 }
 
+.swal2-container {
+  z-index: 99999;
+}

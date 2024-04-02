@@ -1,11 +1,6 @@
 
-<div class="main-modal" *ngIf="this.ver">
-  <div class="main-modal-contenedor">
-    <div class="main-modal-header">
-      {{isConsulta==false?'Modificar Persona':'Consultar Persona'}}
-    </div>
-    <div class="main-modal-body">
-
+<p-dialog appendTo ="body" header=" Modificar persona" [(visible)]="this.ver"
+  [style]="{width: '50vw'}" [maximizable]="true">
       <div class="grid pt-4">
         <span class="p-float-label col">
           <input [disabled]="isConsulta" pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.name" />
@@ -44,11 +39,9 @@
     </div>
 
 
-    </div>
-    <div class="main-modal-footer">
+    <ng-template pTemplate="footer">
       <p-button *ngIf="!isConsulta"  class="mr-2" (click)="guardar()" label="Guardar" icon="fa-solid fa-floppy-disk" severity="success"></p-button>
       <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
-    </div>
-  </div>
+    </ng-template>
 
-</div>
+</p-dialog>
