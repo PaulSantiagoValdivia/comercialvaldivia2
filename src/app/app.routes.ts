@@ -11,5 +11,5 @@ export const routes: Routes = [
   { path: '', component: HomeComponent }, // Página de inicio protegida por el guardia de autenticación
   { path: 'persona', component: CrudPersona}, // Otras rutas protegidas por el guardia de autenticación
   { path: 'roles', component: CrudRolesComponent},
-  { path: 'proveedor', component: CrudProveedorComponent, canActivate: [AuthGuard] },
+  { path: 'proveedor', component: CrudProveedorComponent },
 ];

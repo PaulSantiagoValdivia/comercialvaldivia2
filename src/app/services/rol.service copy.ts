@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, query, updateDoc } from 'firebase/firestore';
 import { Rol } from '../models/rol.model';
 
 @Injectable({
@@ -51,8 +51,4 @@ export class RolService {
     });
     console.log("Eliminado correctamente: ",result,"delete: ",delet);
   }
-  // async deleteReal(key:any) {
-  //   let result=await deleteDoc(doc(this.firestore, this.collection_name, key));
-  //   console.log("Eliminado correctamente: ",result,"delete: ");
-  // }
 }

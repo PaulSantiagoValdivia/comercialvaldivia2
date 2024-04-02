@@ -10,11 +10,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-crear-persona',
   standalone: true,
   imports: [CommonModule,FormsModule,InputNumberModule,
-    InputTextModule,DropdownModule,CheckboxModule,ButtonModule
+    InputTextModule,DropdownModule,CheckboxModule,ButtonModule,DialogModule
   ],
   templateUrl: './crear-persona.component.html',
   styleUrl: './crear-persona.component.css',
@@ -37,8 +38,8 @@ export class CrearPersonaComponent extends BaseController{
   }
   inicializarNuevo(obj:any={}){
   this.obj=obj;
-
   }
+
   mostrar(){
     this.ver=true;
   }
@@ -50,11 +51,12 @@ export class CrearPersonaComponent extends BaseController{
     this.showLoader();
     try{
       console.log("Guardar: ",this.obj);
-    let doc=await this.personaService.create(this.obj.name,this.obj.lastname,this.obj.phoneNumber,this.obj.role,
+    let key=await this.personaService.create(this.obj.name,this.obj.lastname,this.obj.phoneNumber,this.obj.role,
       this.obj.registerMobile,this.obj.registerWeb,this.obj.validate
       );
+      this.obj.key=key;
     this.hideLoader();
-    this.onSave.emit(doc);
+    this.onSave.emit(this.obj);
     this.showToastSuccess("Guardado correctamente");
     //Swal.
     //this.messageService.add({severity: 'success', summary:  'Guardado', detail: 'Correcto.' });

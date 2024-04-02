@@ -9,12 +9,13 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-modifica-persona',
   standalone: true,
   imports: [CommonModule,FormsModule,ButtonModule,CheckboxModule,
     InputNumberModule,
-    InputTextModule,
+    InputTextModule,DialogModule
   ],
   templateUrl: './modifica-persona.component.html',
   styleUrl: './modifica-persona.component.css'
@@ -47,7 +48,7 @@ export class ModificaPersonaComponent extends BaseController{
     let doc=await this.personaService.update(this.key,this.obj.name,this.obj.lastname,
       this.obj.phoneNumber,this.obj.role,this.obj.registerMobile,this.obj.registerWeb,this.obj.validate);
     this.hideLoader();
-    this.onSave.emit(doc);
+    this.onSave.emit(this.obj);
     this.showToastSuccess("Guardado correctamente");
     }catch(error){
 

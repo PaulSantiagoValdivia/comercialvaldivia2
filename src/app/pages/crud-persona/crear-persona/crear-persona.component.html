@@ -1,57 +1,52 @@
-<div class="main-modal" *ngIf="this.ver">
-  <div class="main-modal-contenedor">
-    <div class="main-modal-header">
-      Registrar nueva persona
-    </div>
-    <div class="main-modal-body">
 
-      <div class="grid pt-4">
-        <span class="p-float-label col">
-          <input pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.name" />
-          <label for="username">Nombres</label>
-        </span>
-        <span class="p-float-label col">
-          <input pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.lastname" />
-          <label for="username">Apellidos</label>
-        </span>
-      </div>
-      <div class="grid pt-4">
-        <span class="p-float-label col">
-          <p-inputNumber inputId="integeronly" [(ngModel)]="this.obj.phoneNumber"> </p-inputNumber>
-          <label for="number-input">Celular</label>
-        </span>
-        <span class="p-float-label col">
-          <select class="col" style="width: 100%;height: 100%;" name="" id="" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="this.obj.role">
-            <option value="">Elegir Rol</option>
-            <option *ngFor="let d of this.roles" value="{{d.data().nombre}}">{{d.data().nombre}}</option>
-          </select>
-          <!-- <p-dropdown [options]="this.roles" [(ngModel)]="this.obj.role" optionValue="data().nombre" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown> -->
-          <!-- <label for="float-label">Elegir Rol</label> -->
-        </span>
-
-
-      </div>
-      <div class="grid pt-4">
-      <div class="col">
-        <p-checkbox label="Registro web?" [binary]="true" [(ngModel)]="this.obj.registerWeb"></p-checkbox>
-      </div>
-      <div class="col">
-        <p-checkbox label="Registro movil?" [binary]="true"  [(ngModel)]="this.obj.registerMobile"></p-checkbox>
-      </div>
-      <div class="col">
-        <p-checkbox label="Valido?" [binary]="true"  [(ngModel)]="this.obj.validate"></p-checkbox>
-      </div>
-    </div>
-
-
-    </div>
-    <div class="main-modal-footer">
-      <p-button class="mr-2" (click)="guardar()" label="Guardar" icon="fa-solid fa-floppy-disk" severity="success"></p-button>
-      <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
-      <!-- <button (click)="guardar()" class="main-btn-success"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
-      <button (click)="ocultar()" class="main-btn-danger"><i class="fa-solid fa-xmark"></i>Cancelar</button> -->
-    </div>
+<p-dialog appendTo ="body" header=" Registrar persona" [(visible)]="this.ver"
+  [style]="{width: '50vw'}" [maximizable]="true">
+  <div class="grid pt-4">
+    <span class="p-float-label col">
+      <input pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.name" />
+      <label for="username">Nombres</label>
+    </span>
+    <span class="p-float-label col">
+      <input pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.lastname" />
+      <label for="username">Apellidos</label>
+    </span>
   </div>
+  <div class="grid pt-4">
+    <span class="p-float-label col">
+      <p-inputNumber inputId="integeronly" [(ngModel)]="this.obj.phoneNumber"> </p-inputNumber>
+      <label for="number-input">Celular</label>
+    </span>
+    <span class="p-float-label col">
+      <select class="col" style="width: 100%;height: 100%;" name="" id="" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.obj.role">
+        <option value="">Elegir Rol</option>
+        <option *ngFor="let d of this.roles" value="{{d.data().nombre}}">{{d.data().nombre}}</option>
+      </select>
+      <!-- <p-dropdown [options]="this.roles" [(ngModel)]="this.obj.role" optionValue="data().nombre" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown> -->
+      <!-- <label for="float-label">Elegir Rol</label> -->
+    </span>
 
+
+  </div>
+  <div class="grid pt-4">
+  <div class="col">
+    <p-checkbox label="Registro web?" [binary]="true" [(ngModel)]="this.obj.registerWeb"></p-checkbox>
+  </div>
+  <div class="col">
+    <p-checkbox label="Registro movil?" [binary]="true"  [(ngModel)]="this.obj.registerMobile"></p-checkbox>
+  </div>
+  <div class="col">
+    <p-checkbox label="Valido?" [binary]="true"  [(ngModel)]="this.obj.validate"></p-checkbox>
+  </div>
 </div>
+
+
+
+
+
+
+  <ng-template pTemplate="footer">
+    <p-button class="mr-2" (click)="guardar()" label="Guardar" icon="fa-solid fa-floppy-disk" severity="success"></p-button>
+      <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
+  </ng-template>
+</p-dialog>

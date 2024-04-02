@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, getDocs, query } from '@angular/fire/firestore';
-import { doc, getCountFromServer, limit, orderBy, startAfter, startAt, updateDoc, where } from 'firebase/firestore';
+import { deleteDoc, doc, getCountFromServer, getDoc, limit, orderBy, startAfter, startAt, updateDoc, where } from 'firebase/firestore';
+import { Persona } from '../models/persona.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class PersonaService {
       creado:new Date().toISOString()
     });
     console.log("Persona Document written with ID: ", docRef.id);
+    return docRef.id;
   }
   async update(key:any,name:any,lastname:any,phoneNumber:any,role:any,registerMobile:boolean,registerWeb:boolean,validate:boolean) {
     let result=await updateDoc(doc(this.firestore, this.collection_name, key),{
@@ -51,6 +53,7 @@ export class PersonaService {
     //   role
     // });
     //console.log("Persona Document written with ID: ", docRef.id);
+    return result;
   }
   async getList(){
     //return await collection(this.firestore, 'PERSONA');
@@ -167,6 +170,17 @@ return data;
     result.forEach((doc)=>{d.data.push(doc);})
     return d;
 
+  }
+  async getPersonaById(key:any){
+
+    let docc=await getDoc(doc(this.firestore, this.collection_name, key));
+    let obj:Persona=Object.setPrototypeOf(docc.data(),Persona.prototype);
+    obj.key=docc.id;
+    return obj;
+  }
+  async deleteReal(key:any) {
+    let result=await deleteDoc(doc(this.firestore, this.collection_name, key));
+    console.log("Eliminado correctamente: ",result,"delete: ");
   }
 }
 
