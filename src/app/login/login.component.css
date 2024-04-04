@@ -15,8 +15,11 @@
   text-align: center;
   font-family: Poppins;
 }
-
+.imgCbn{
+  width: 215px;
+}
 .title {
+  margin-top: -300px;
   color: #000;
   font-family: Poppins;
   font-size: 22px;
@@ -33,6 +36,15 @@
   font-style: normal;
   font-weight: 900;
   line-height: 36px;
+}
+.sub-title1 {
+  font-family: Poppins;
+  color: #000;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 14px;
 }
 
 .logo {
@@ -130,6 +142,19 @@ button:hover {
   background: linear-gradient(102.81deg, #f3900d, #ffdd31);
   transition: background-color 1s ease;
   /* Smooth transition for hover effect */
+}
+
+.button-animation {
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }
 
 

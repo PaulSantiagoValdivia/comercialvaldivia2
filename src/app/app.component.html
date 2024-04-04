@@ -7,4 +7,19 @@
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+
+<div *ngIf="bandera">
+  <div class="home-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+      <!-- Contenido principal de tu página aquí -->
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!bandera">
+  <router-outlet></router-outlet>
+</div>

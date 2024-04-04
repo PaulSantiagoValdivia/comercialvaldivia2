@@ -1,40 +1,46 @@
 <div class="login-container" *ngIf="!validate">
   <div class="login-card" *ngIf="!userExist">
-    <p class="sub-title" >Iniciar session</p>
-    <div class="form-group"  >
+    <div class="img-container">
+      <img class="imgCbn" src="/assets/CBN_logo.png" alt="CBN">
+    </div>
+    <p class="sub-title">Iniciar sesión</p>
+    <div class="form-group">
       <div class="box" *ngIf="!confirmationResult">
-        <label for="phone">Utiliza tu número de Teléfono:</label>
+        <label for="phone">Utiliza tu número de teléfono:</label>
         <div class="phone-input">
           <img src="/assets/bolivia.png" alt="Bolivia">+591
-          <input type="tel" id="phone" [(ngModel)]="phoneNumber" placeholder="+591">
+          <input type="tel" id="phone" [(ngModel)]="phoneNumber" autofocus>
         </div>
         <div id="recaptcha-container"></div>
-        <button (click)="sendVerificationCode()">Enviar código de verificación</button>
+        <button (click)="sendVerificationCode()" [ngClass]="{'button-animation': animacion, 'otra-clase': !animacion}" *ngIf="!confirmationResult">
+          Enviar código de verificación
+        </button>
+
       </div>
 
       <div *ngIf="confirmationResult">
-        <label for="verificationCode">Ingresa el código de Verificación:</label>
-        <input type="text" id="verificationCode" [(ngModel)]="verificationCode" placeholder="654758">
-        <button (click)="verifyCode()">Ingresar</button>
+        <label for="verificationCode">Ingresa el código de verificación:</label>
+        <input type="text" id="verificationCode" [(ngModel)]="verificationCode" autofocus>
+         <button (click)="verifyCode()">Ingresar</button>
       </div>
-
     </div>
   </div>
   <div class="login-card" *ngIf="userExist">
-    <p>Ups! no cuentas con un registro.</p>
+    <p class="sub-title1">¡Ups! No cuentas con un registro. deseas registrarte?</p>
+    <p class="sub-title1">¡Ojo! Solo si eres usuario CBN</p>
     <form (ngSubmit)="registerPerson()">
       <label for="nombre">Ingresa tus nombres:</label>
       <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
-      <label for="lastaname">Ingresa tus apellidos:</label>
-      <input type="text" id="lastanme" [(ngModel)]="lastname" name="lastanem">
+      <label for="lastname">Ingresa tus apellidos:</label>
+      <input type="text" id="lastname" [(ngModel)]="lastname" name="lastname">
+
       <button type="submit">Registrarse</button>
     </form>
   </div>
 </div>
 
-
 <div class="login-container" *ngIf="validate">
-<div class="login-card">
-  <p class="sub-title" >Su cuenta esta esperando a ser validada por CBN. porfavor intente iniciar session mas tarde o comuniquese con el equipo de cbn</p>
-</div>
+  <div class="login-card">
+    <p class="sub-title1">Su cuenta está esperando a ser validada por CBN. Por favor, intente iniciar sesión más tarde o comuníquese con el equipo de CBN.</p>
+  </div>
 </div>
