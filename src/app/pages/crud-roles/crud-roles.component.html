@@ -1,10 +1,8 @@
-<div class="home-container">
-  <app-sidebar></app-sidebar>
-  <div class="main-content">
+
     <!-- Contenido principal de tu página aquí -->
-    <app-crear-rol #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-rol>
     <!-- <app-modificar-rol #modalModifica (onSave)="onNuevoSave($event)"></app-modificar-rol> -->
-    <div class="content">
+    <app-crear-rol #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-rol>
+
       <!-- <h3 style="text-align: center;">ADMINISTRAR PERSONAS</h3> -->
       <div style="text-align: center;">ADMINISTRAR ROLES</div>
       <!-- <app-crear-persona #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-persona>
@@ -73,6 +71,4 @@
       </div>
 
 
-    </div>
-  </div>
-</div>
+

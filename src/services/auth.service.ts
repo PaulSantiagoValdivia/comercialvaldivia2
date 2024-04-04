@@ -1,3 +1,4 @@
+import { compileDeclareNgModuleFromMetadata } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,25 +14,25 @@ export class AuthService {
   private auth: Auth;
   private recaptchaVerifier: RecaptchaVerifier | undefined;
   private confirmationResult: any;
-  private userSubject: BehaviorSubject<User | null>;
+  private currentUserSubject: BehaviorSubject<User | null>;
 
   constructor( private router: Router) {
     this.auth = getAuth();
-
-    this.userSubject = new BehaviorSubject<User | null>(null);
-    this.auth.setPersistence(browserLocalPersistence);
+    this.currentUserSubject = new BehaviorSubject<User | null>(null);
 
     onAuthStateChanged(this.auth, user => {
-      this.userSubject.next(user);
       if (user) {
-        // Si el usuario está autenticado, no redirigir al inicio de sesión
-        // en lugar de eso, puedes redirigirlo a la página que estaba intentando acceder
-        // antes de que se le pidiera iniciar sesión, o a la página principal, por ejemplo.
-        // En este caso, lo redirigiremos a la página principal.
-        this.router.navigate(['/']);
+        this.currentUserSubject.next(user);
+        // Si el usuario está autenticado, establecer el estado de inicio de sesión en el almacenamiento local
+        if (typeof localStorage !== 'undefined') {
+
+        }
       } else {
-        // Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
-        this.router.navigate(['/login']);
+        this.currentUserSubject.next(null);
+        // Si el usuario no está autenticado, borrar el estado de inicio de sesión del almacenamiento local
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem('isLoggedIn');
+        }
       }
     });
   }
@@ -60,7 +61,7 @@ export class AuthService {
         throw new Error('No confirmation result available');
       }
       const userCredential = await this.confirmationResult.confirm(verificationCode);
-      console.log('Usuario autenticado:', userCredential);
+
       return userCredential;
     } catch (error) {
       console.error('Error al verificar el código de verificación:', error);
@@ -73,7 +74,19 @@ export class AuthService {
 
   logout = async () => {
     try {
+      // Cerrar sesión en Firebase
       await this.auth.signOut();
+
+      // Limpiar el almacenamiento local
+      if (typeof localStorage !== 'undefined') {
+        localStorage.clear(); // Borra todos los datos del almacenamiento local
+      }
+
+      // Redirigir a la página de inicio de sesión
+      this.router.navigate(['/login']).then(() => {
+        window.location.reload();
+      });
+
       console.log('Sesión cerrada exitosamente');
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
@@ -81,8 +94,16 @@ export class AuthService {
     }
   }
 
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
+  }
+
   isLoggedIn(): boolean {
-    const currentUser = this.userSubject.value;
-    return !!currentUser;
+    // Comprueba si el estado de inicio de sesión está presente en el almacenamiento local
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('isLoggedIn') === 'true';
+    } else {
+      return false;
+    }
   }
 }

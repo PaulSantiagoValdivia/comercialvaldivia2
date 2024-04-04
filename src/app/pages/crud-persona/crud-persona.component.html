@@ -1,9 +1,4 @@
-<div class="home-container">
-  <app-sidebar></app-sidebar>
-  <div class="main-content">
-    <!-- Contenido principal de tu página aquí -->
 
-    <div class="content">
       <!-- <h3 style="text-align: center;">ADMINISTRAR PERSONAS</h3> -->
       <div style="text-align: center;">ADMINISTRAR PERSONAS</div>
       <app-crear-persona #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-persona>
@@ -111,7 +106,3 @@
           [totalRecords]="this.total_register" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
       </div>
 
-
-    </div>
-  </div>
-</div>

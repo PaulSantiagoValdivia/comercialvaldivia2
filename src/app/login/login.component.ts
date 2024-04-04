@@ -24,6 +24,8 @@ export class LoginComponent extends BaseController implements OnInit {
   nombre: string = '';
   lastname: string = '';
   r: boolean = false;
+  bandera: boolean = false;
+  animacion: boolean = false;
   constructor(
     http: HttpClient,
     private authService: AuthService,
@@ -33,20 +35,25 @@ export class LoginComponent extends BaseController implements OnInit {
     super(http);
   }
   override ngOnInit(): void {
+    this.bandera= this.authService.isLoggedIn();
+    console.log(this.bandera);
 
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/']);
-    }else{
-      console.log(this.authService.isLoggedIn());
-      this.router.navigate(['/login']);
-    }
+        // Verificar si el usuario está autenticado al cargar la aplicación
+          if (this.bandera) {
+            // Si el usuario no está autenticado, redirigir a la página de inicio de sesión
+         this.router.navigate(['/']);
+         }else{
+         this.router.navigate(['/login']);
+         }
+
+
   }
 
   async sendVerificationCode() {
+    this.animacion=true;
     try {
-
-      this.phoneNumber="+591"+this.phoneNumber;
-      console.log("parseado",this.automaticParsePhoneNumber(this.phoneNumber));
+      const number = "+591"+this.phoneNumber;
+      console.log("parseado",this.automaticParsePhoneNumber(number));
       console.log(this.phoneNumber);
 
       await this.authService.sendVerificationCode(this.automaticParsePhoneNumber(this.phoneNumber));
@@ -59,15 +66,26 @@ export class LoginComponent extends BaseController implements OnInit {
   }
 
   async verifyCode() {
+    this.animacion=false;
     try {
       this.showLoader();
-      await this.authService.verifyCode(this.verificationCode); // Usa el método del servicio AuthService
-      this.isLoggedIn();
+      const userCredential = await this.authService.verifyCode(this.verificationCode);
+      // Almacena el resultado en una variable
+      if (userCredential) {
+        // Aquí puedes hacer lo que quieras con userCredential
+        console.log('Usuario autenticado:', userCredential);
+        // Por ejemplo, podrías llamar a isLoggedIn() si es necesario
+        this.isLoggedIn();
+      } else {
+        console.log('Error: No se pudo verificar el código de verificación.');
+      }
     } catch (error) {
       this.hideLoader();
-      console.error(error);
+      console.error('Error al verificar el código de verificación:', error);
     }
+
   }
+
 
 
   isLoggedIn() {
@@ -79,7 +97,10 @@ export class LoginComponent extends BaseController implements OnInit {
           if (user.validate) {
             this.hideLoader();
             localStorage.setItem('loggedInUser', JSON.stringify(user));
-            this.router.navigate(['/']);
+            localStorage.setItem('isLoggedIn', 'true');
+            this.router.navigate(['/']).then(() => {
+              window.location.reload();
+            });
             console.log('El número de teléfono existe en la tabla de personas y la cuenta está validada.');
           } else {
             console.log('La cuenta está esperando a ser validada.');
@@ -129,4 +150,15 @@ export class LoginComponent extends BaseController implements OnInit {
       // Realiza cualquier acción adicional si el número de teléfono ya está registrado
     }
   }
+  onPhoneNumberChange() {
+    // Verificar si el número de teléfono tiene una longitud válida
+    if (this.phoneNumber && this.phoneNumber.length === 9) {
+      // Enfocar el campo de verificación
+      const verificationInput = document.getElementById('verificationCode');
+      if (verificationInput) {
+        verificationInput.focus();
+      }
+    }
+  }
+
 }
