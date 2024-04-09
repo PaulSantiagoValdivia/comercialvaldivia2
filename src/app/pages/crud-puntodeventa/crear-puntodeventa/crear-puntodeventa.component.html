@@ -1,0 +1,121 @@
+<p-dialog [modal]="true" appendTo="body"
+  header=" {{this.type==1?'Registrar ':(this.type==2?'Modificar ':'Consultar ')}}punto de venta" [(visible)]="this.ver"
+  [style]="{width: '80vw'}" [maximizable]="true">
+
+  <div class="formgrid grid">
+    <div class="field md:col-2">
+      <label for="firstname2">Codigo:</label>
+      <p-inputNumber [useGrouping]="false" styleClass="w-full" class="w-full" inputStyleClass="w-full"
+        [disabled]="this.type==3" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.codigo"> </p-inputNumber>
+
+    </div>
+    <div class="field md:col-8">
+      <label for="firstname2">Nombre:</label>
+      <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.obj.nombre" class="w-full" />
+    </div>
+    <div class="field md:col-2">
+      <label for="lastname2">Estado: </label><br>
+      <p-inputSwitch [disabled]="this.type==3" [(ngModel)]="this.obj.activo"></p-inputSwitch>
+    </div>
+    <div class="field md:col-3">
+      <label for="firstname2">Nombre fantasia:</label>
+      <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="this.obj.nombre_fantasia" class="w-full" />
+
+    </div>
+    <div class="field md:col-3">
+      <label for="firstname2">Domicilio:</label>
+      <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.obj.domicilio" class="w-full" />
+    </div>
+    <div class="field md:col-3">
+      <label for="firstname2">Telefono:</label>
+      <p-inputNumber [useGrouping]="false" styleClass="w-full" class="w-full" inputStyleClass="w-full"
+        [disabled]="this.type==3" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.telefono"> </p-inputNumber>
+
+    </div>
+    <div class="field md:col-3">
+      <label for="firstname2">NIT:</label>
+      <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.obj.nit" class="w-full" />
+    </div>
+    <div class="field md:col-6">
+      <label for="firstname2">SUBCANAL:</label>
+      <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.obj.sub_canal" class="w-full" />
+    </div>
+    <div class="field md:col-6">
+      <label for="firstname2">DIA DE VISITA:</label>
+      <select class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto"  [disabled]="type==3"   name="" id="" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="this.obj.dia_visita">
+        <option value="">Elegir DIA</option>
+        <option value="LU">1 | LUNES</option>
+        <option value="MA">2 | MARTES</option>
+        <option value="MI">3 | MIERCOLES</option>
+        <option value="JU">4 | JUEVES</option>
+        <option value="VI">5 | VIERNES</option>
+        <option value="SA">6 | SABADO</option>
+        <option value="DO">7 | DOMINGO</option>
+      </select>
+    </div>
+
+
+
+
+    <div class="field md:col-3">
+      <label for="lastname2">Territorio: </label><br>
+
+      <p-inputGroup>
+        <input disabled="true" type="text" value="{{this.obj.territorio?.codigo}} | {{this.obj.territorio?.nombre}}"
+          pInputText placeholder="Territorio" />
+        <button *ngIf="this.type!=3" (click)="abrirTerritorio()" type="button" pButton icon="fa fa-search"
+          class="p-button-warning"></button>
+      </p-inputGroup>
+    </div>
+    <div class="field md:col-3">
+      <label for="lastname2">Zona: </label><br>
+
+      <p-inputGroup>
+        <input disabled="true" type="text"
+          value="{{this.obj.territorio?.zona?.codigo}} | {{this.obj.territorio?.zona?.nombre}}" pInputText
+          placeholder="ZONA" />
+
+      </p-inputGroup>
+    </div>
+    <div class="field md:col-3">
+      <label for="lastname2">SubRegion: </label><br>
+
+      <p-inputGroup>
+        <input disabled="true" type="text"
+          value="{{this.obj.territorio?.zona?.subregion?.codigo}} | {{this.obj.territorio?.zona?.subregion?.nombre}}"
+          pInputText placeholder="SUBREGION" />
+
+      </p-inputGroup>
+    </div>
+    <div class="field md:col-3">
+      <label for="lastname2">Region: </label><br>
+
+      <p-inputGroup>
+        <input disabled="true" type="text"
+          value="{{this.obj.territorio?.zona?.subregion?.region?.codigo}} | {{this.obj.territorio?.zona?.subregion?.region?.nombre}}"
+          pInputText placeholder="REGION" />
+
+      </p-inputGroup>
+    </div>
+  </div>
+
+
+
+
+  <ng-template pTemplate="footer">
+    <p-button *ngIf="this.type==1" (click)="guardar()" label="Guardar" icon="fa-solid fa-save"
+      severity="success"></p-button>
+    <p-button *ngIf="this.type==2" (click)="modificar()" label="Modificar" icon="fa-solid fa-save"
+      severity="success"></p-button>
+    <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+<app-buscar-territorio #modalBuscarTerritorio (onSave)="onSelectedTerritorio($event)"></app-buscar-territorio>

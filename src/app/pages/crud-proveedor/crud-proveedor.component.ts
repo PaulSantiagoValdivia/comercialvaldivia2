@@ -70,10 +70,10 @@ export class CrudProveedorComponent extends BaseController{
     this.recargarLista_()
   }
   clickNuevo(){
-    this.modalNuevo.inicializar();
+    this.modalNuevo.inicializar(true,{creado:null},1,2);
   }
   clickEditar(data:Proveedor,type=2){
-    this.modalNuevo.inicializar(true,data,type);
+    this.modalNuevo.inicializar(true,data,type,2);
   }
   async clickEliminar(data:Proveedor){
     try{

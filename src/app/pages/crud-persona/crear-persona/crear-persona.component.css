@@ -1,0 +1,9 @@
+select{
+  padding: 0.7rem!important;
+}
+/* ::ng-deep .p-dialog .p-dialog-header{
+  background-color: var(--main-color-warning);
+} */
+.header_warning .p-dialog .p-dialog-header{
+  background-color: var(--main-color-warning);
+}
