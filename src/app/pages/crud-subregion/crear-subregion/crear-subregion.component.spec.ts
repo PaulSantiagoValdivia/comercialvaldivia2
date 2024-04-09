@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModificaPersonaComponent } from './modifica-persona.component';
+import { CrearSubregionComponent } from './crear-subregion.component';
 
-describe('ModificaPersonaComponent', () => {
-  let component: ModificaPersonaComponent;
-  let fixture: ComponentFixture<ModificaPersonaComponent>;
+describe('CrearSubregionComponent', () => {
+  let component: CrearSubregionComponent;
+  let fixture: ComponentFixture<CrearSubregionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModificaPersonaComponent]
+      imports: [CrearSubregionComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ModificaPersonaComponent);
+    fixture = TestBed.createComponent(CrearSubregionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

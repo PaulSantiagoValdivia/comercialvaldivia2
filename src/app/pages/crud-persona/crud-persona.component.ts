@@ -17,7 +17,7 @@ import { PersonaService } from '../../services/persona.service';
 import { Firestore } from '@angular/fire/firestore';
 import { QueryDocumentSnapshot, setDoc } from '@firebase/firestore';
 import { CrearPersonaComponent } from './crear-persona/crear-persona.component';
-import { ModificaPersonaComponent } from './modifica-persona/modifica-persona.component';
+//import { ModificaPersonaComponent } from './modifica-persona/modifica-persona.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -29,7 +29,7 @@ import { BadgeModule } from 'primeng/badge';
   templateUrl: './crud-persona.component.html',
   styleUrl: './crud-persona.component.css',
   imports: [ /*FormsModule,*/ CommonModule, SidebarComponent,
-  CrearPersonaComponent,ModificaPersonaComponent,PaginatorModule,TableModule,ButtonModule,
+  CrearPersonaComponent,PaginatorModule,TableModule,ButtonModule,
   BadgeModule
 ],
   providers: [PersonaService],
@@ -39,7 +39,7 @@ import { BadgeModule } from 'primeng/badge';
 })
 export class CrudPersona extends BaseController{
   @ViewChild('modalNuevo') modalNuevo!:CrearPersonaComponent;
-  @ViewChild('modalModifica') modalModifica!:ModificaPersonaComponent;
+  //@ViewChild('modalModifica') modalModifica!:ModificaPersonaComponent;
 //   public list=[{
 //     nombre:"Proveedor SRL",
 //     key_persona:"AS12154654",
@@ -172,7 +172,7 @@ list:any=[];
     //esta funcion es para abrir y limpiar el modal
     inicializarNuevoRegistro(){
       this.modalNuevo.mostrar();
-      this.modalNuevo.inicializarNuevo();
+      this.modalNuevo.inicializar();
     }
     //es la funcion donde recibira el evento del MODAL NUEVO al guardar
     onNuevoSave(data:any){
@@ -186,10 +186,15 @@ list:any=[];
       this.recargarLista_();
     }
     clickEditar(doc:QueryDocumentSnapshot,isconsult=false){
-      this.modalModifica.mostrar();
-      this.modalModifica.isConsulta=isconsult;
-      this.modalModifica.inicializarNuevo(doc.data(),doc.id);
-
+     // this.modalModifica.mostrar();
+    //  this.modalModifica.isConsulta=isconsult;
+     // this.modalModifica.inicializarNuevo(doc.data(),doc.id);
+      //let obj=doc.data();
+      //obj['key']=doc.id;
+      let o=JSON.parse(JSON.stringify(doc.data()));
+      o.key=doc.id;
+      this.modalNuevo.mostrar();
+      this.modalNuevo.inicializar(true,o,isconsult?3:2)
       //doc.
       //doc.update({lastName:"Test"})
       //setDoc(doc, { capital: true });

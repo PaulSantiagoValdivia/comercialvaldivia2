@@ -10,7 +10,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CrearPersonaComponent } from '../../crud-persona/crear-persona/crear-persona.component';
 import { PersonaService } from '../../../services/persona.service';
-import { ModificaPersonaComponent } from '../../crud-persona/modifica-persona/modifica-persona.component';
+//import { ModificaPersonaComponent } from '../../crud-persona/modifica-persona/modifica-persona.component';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -19,7 +19,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
   selector: 'app-crear-proveedor',
   standalone: true,
   imports: [ButtonModule,CommonModule,FormsModule,DialogModule,
-    InputSwitchModule,CrearPersonaComponent,ModificaPersonaComponent,
+    InputSwitchModule,CrearPersonaComponent,
     InputGroupModule,InputTextModule,InputNumberModule
   ],
   templateUrl: './crear-proveedor.component.html',
@@ -29,15 +29,18 @@ export class CrearProveedorComponent  extends ModalBaseController {
   obj:Proveedor;
   type:any;//tipo 1 es nuevo, 2=modifica 3consulta
   @ViewChild('modalNuevoPersona') modalNuevoPersona!:CrearPersonaComponent;
-  @ViewChild('modalModificaPersona') modalModificaPersona!:ModificaPersonaComponent;
+  persona_type_content=1;
+  //@ViewChild('modalModificaPersona') modalModificaPersona!:ModificaPersonaComponent;
   constructor(httpclient:HttpClient,private service:ProveedorService,private personaService:PersonaService){
     super(httpclient);
     this.obj={creado:null};
   }
-  inicializar(mostrar=true,obj:Proveedor={creado:null},type=1){
+  inicializar(mostrar=true,obj:Proveedor={creado:null},type=1,persona_type_content=1){
     this.obj=obj;
     this.ver=mostrar;
     this.type=type;
+    this.persona_type_content=persona_type_content;
+    if(persona_type_content==2)this.abrirPersona();//si es tipo 2 cargo la persona directo en el form
   }
   async abrirPersona(){
     console.log("Data: ",this.obj)
@@ -52,10 +55,11 @@ export class CrearProveedorComponent  extends ModalBaseController {
         return;
       }
       console.log("Es modificar persona");
-      this.modalModificaPersona.inicializarNuevo(this.obj.persona,this.obj.key_persona);
-      this.modalModificaPersona.mostrar();
+      this.modalNuevoPersona.inicializar(true,this.obj.persona,this.type,this.persona_type_content);
+    //  this.modalModificaPersona.inicializarNuevo(this.obj.persona,this.obj.key_persona);
+    //  this.modalModificaPersona.mostrar();
     }
-    else {this.modalNuevoPersona.inicializarNuevo();
+    else {this.modalNuevoPersona.inicializar(true,{creado:null},1,this.persona_type_content);
       this.modalNuevoPersona.mostrar();
     }
 
@@ -65,17 +69,23 @@ export class CrearProveedorComponent  extends ModalBaseController {
     this.obj.persona=data;
     this.obj.key_persona=data.key;
   }
-  onModificaPersona(data:any){
-    console.log("onSavePersona: ",data);
-    this.obj.persona=data;
-  //  this.obj.key_persona=data.key;
-  }
+  // onModificaPersona(data:any){
+  //   console.log("onSavePersona: ",data);
+  //   this.obj.persona=data;
+  // //  this.obj.key_persona=data.key;
+  // }
   async guardar(){
     console.log("Guardar: ",this.obj);
-    if(!this.validar()){return;}
-    this.showLoader();
+
+
     try{
 
+      if(this.persona_type_content==2){//si es tipo form, se guarda manual, sino ya se guardo en modal
+        let r=await this.modalNuevoPersona.save();
+        if(!r)return;
+      }
+      if(!this.validar()){return;}
+    this.showLoader();
     let doc=await this.service.create(this.obj);
     this.hideLoader();
     this.onSave.emit(doc);
@@ -89,10 +99,16 @@ export class CrearProveedorComponent  extends ModalBaseController {
   }
   async modificar(){
     console.log("Guardar: ",this.obj);
-    if(!this.validar()){return;}
-    this.showLoader();
-    try{
 
+
+    try{
+      if(this.persona_type_content==2){//si es tipo form, se guarda manual, sino ya se guardo en modal
+        let r=await this.modalNuevoPersona.save();
+        if(!r)return;
+      }
+
+      if(!this.validar()){return;}
+      this.showLoader();
     let doc=await this.service.update(this.obj);
     this.hideLoader();
     this.onSave.emit(doc);

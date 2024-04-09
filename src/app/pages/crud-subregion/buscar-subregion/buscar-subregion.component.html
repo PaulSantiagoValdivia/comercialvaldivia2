@@ -1,0 +1,75 @@
+<style>
+  .swal2-container {
+    z-index: 99999999!important;
+  }
+    </style>
+
+  <p-dialog [modal]="true" appendTo ="body" header="SELECCIONAR SUBREGION" [(visible)]="this.ver"
+    [style]="{width: '80vw'}" [maximizable]="true">
+
+    <div class="formgrid grid">
+      <div style="display:flex;flex-wrap: wrap; justify-content: end;grid-gap: 5px;padding: 5px;">
+        <!-- <label for="">Buscar</label>
+      <button (click)="this.buscar()"> buscar</button> -->
+      <input type="text" [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="this.filter_text">
+      <p-button (click)="this.recargarLista_()" label="" icon="fa-solid fa-search" severity="info"></p-button>
+
+    </div>
+
+
+
+    <p-table #dt [value]="getList()" responsiveLayout="scroll" [rows]="this.size_page" sortField="codigo" [sortOrder]="-1"
+      [globalFilterFields]="['codigo','region.nombre','nombre','status']" [paginator]="true"
+      [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="single"
+      [rowHover]="true" dataKey="key">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="codigo"><p-sortIcon field="Codigo"></p-sortIcon>Codigo</th>
+          <th pSortableColumn="nombre"><p-sortIcon field="Nombre"></p-sortIcon>Nombre</th>
+           <th pSortableColumn="region.nombre">
+            <p-sortIcon field="region.nombre"></p-sortIcon>
+            Region
+            <p-columnFilter type="text" field="region.nombre" display="menu" matchMode="contains" [showMatchModes]="false" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" ></p-columnFilter>
+
+          </th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-table_item>
+        <tr [pSelectableRow]="table_item">
+
+          <td style="width:14%; min-width:10rem;"><span class="p-column-title">Codigo</span>
+            {{table_item.codigo}}
+          </td>
+          <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
+            {{table_item.nombre}}
+          </td>
+          <td style="width:14%; min-width:10rem;"><span class="p-column-title">Region</span>
+            {{table_item.region?.nombre}}
+          </td>
+          <td style="width:14%; min-width:10rem;"><span class="p-column-title"></span>
+            <p-badge *ngIf="table_item.activo" [value]="'Si'" severity="success"></p-badge>
+            <p-badge *ngIf="!table_item.activo"  [value]="'No'" severity="danger"></p-badge>
+          </td>
+          <td style="width: 14%; min-width:12rem;"><span class="p-column-title"></span>
+            <p-button (click)="this.clickSelect(table_item)" icon="fa-solid fa-check" [rounded]="true" severity="info" [outlined]="true"></p-button>
+
+
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+
+    <ng-template pTemplate="footer">
+      <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
+    </ng-template>
+  </p-dialog>
+
+
