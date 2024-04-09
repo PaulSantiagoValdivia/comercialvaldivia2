@@ -1,0 +1,51 @@
+
+
+  <p-dialog [modal]="true" appendTo ="body" header=" {{this.type==1?'Registrar ':(this.type==2?'Modificar ':'Consultar ')}}zona" [(visible)]="this.ver"
+    [style]="{width: '50vw'}" [maximizable]="true">
+
+    <div class="formgrid grid">
+      <div class="field md:col-2">
+          <label for="firstname2">Codigo:</label>
+          <p-inputNumber [useGrouping]="false" styleClass="w-full" class="w-full" inputStyleClass="w-full" [disabled]="this.type==3" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.codigo"> </p-inputNumber>
+
+      </div>
+      <div class="field md:col-8">
+        <label for="firstname2">Nombre:</label>
+        <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.nombre" class="w-full" />
+    </div>
+      <div class="field md:col-2">
+          <label for="lastname2">Estado: </label><br>
+          <p-inputSwitch [disabled]="this.type==3" [(ngModel)]="this.obj.activo"></p-inputSwitch>
+      </div>
+      <div class="field md:col-6">
+        <label for="lastname2">Subregion: </label><br>
+
+        <p-inputGroup>
+          <input disabled="true" type="text" value="{{this.obj.subregion?.codigo}} | {{this.obj.subregion?.nombre}}" pInputText placeholder="SUREGION" />
+          <button *ngIf="this.type!=3" (click)="abrirSubRegion()" type="button" pButton icon="fa fa-search" class="p-button-warning"></button>
+        </p-inputGroup>
+    </div>
+    <div class="field md:col-6">
+      <label for="lastname2">Region: </label><br>
+
+      <p-inputGroup>
+        <input disabled="true" type="text" value="{{this.obj.subregion?.region?.codigo}} | {{this.obj.subregion?.region?.nombre}}" pInputText placeholder="REGION" />
+
+      </p-inputGroup>
+  </div>
+  </div>
+
+
+
+
+    <ng-template pTemplate="footer">
+      <p-button *ngIf="this.type==1" (click)="guardar()" label="Guardar" icon="fa-solid fa-save"
+        severity="success"></p-button>
+      <p-button *ngIf="this.type==2" (click)="modificar()" label="Modificar" icon="fa-solid fa-save"
+        severity="success"></p-button>
+      <p-button (click)="ocultar()" label="Cancelar" icon="fa-solid fa-xmark" severity="danger"></p-button>
+    </ng-template>
+  </p-dialog>
+
+
+  <app-buscar-subregion #modalBuscarSubRegion (onSave)="onSelectedSubRegion($event)"></app-buscar-subregion>

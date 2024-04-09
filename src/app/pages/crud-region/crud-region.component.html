@@ -9,9 +9,10 @@ if (typeof window !== 'undefined') {
   </script>
   <div class="main-content">
     <!-- Contenido principal de tu página aquí -->
-    <app-crear-proveedor #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-proveedor>
+    <app-crear-region #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-region>
+    <!-- <app-crear-proveedor #modalNuevo (onSave)="onNuevoSave($event)"></app-crear-proveedor> -->
     <div class="content">
-      <div style="text-align: center;">ADMINISTRAR PROVEEDORES</div>
+      <div style="text-align: center;">ADMINISTRAR REGIONES</div>
       <div style="display:flex;flex-wrap: wrap; justify-content: start;grid-gap: 5px;padding: 5px;">
 
 
@@ -28,25 +29,27 @@ if (typeof window !== 'undefined') {
 
 
 
-      <p-table #dt [value]="getList()" responsiveLayout="scroll" [rows]="this.size_page"
+      <p-table #dt [value]="getList()" responsiveLayout="scroll" [rows]="this.size_page" sortField="codigo" [sortOrder]="-1"
         [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true"
         [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="single"
         [rowHover]="true" dataKey="key">
         <ng-template pTemplate="header">
           <tr>
-            <th>Nro Legajo</th>
+            <th pSortableColumn="codigo"><p-sortIcon field="Codigo"></p-sortIcon>Codigo</th>
+            <th pSortableColumn="nombre"><p-sortIcon field="Nombre"></p-sortIcon>Nombre</th>
             <th>Estado</th>
             <th>Acciones</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-table_item>
           <tr [pSelectableRow]="table_item">
-            <!-- <td>
-                            <p-tableCheckbox [value]="table_item"></p-tableCheckbox>
-                        </td> -->
+
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Codigo</span>
+              {{table_item.codigo}}
+            </td>
             <td style="width:14%; min-width:10rem;"><span class="p-column-title">Nombre</span>
-              {{table_item.nro_legajo}}
+              {{table_item.nombre}}
             </td>
             <td style="width:14%; min-width:10rem;"><span class="p-column-title"></span>
               <p-badge *ngIf="table_item.activo" [value]="'Si'" severity="success"></p-badge>
@@ -62,8 +65,6 @@ if (typeof window !== 'undefined') {
         </ng-template>
       </p-table>
       <div>
-        <!-- <p-paginator (onPageChange)="onPageChange($event)" [first]="1" [rows]="this.size_page"
-          [totalRecords]="this.total_register" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator> -->
       </div>
 
 
