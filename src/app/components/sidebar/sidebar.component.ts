@@ -29,6 +29,7 @@ export class SidebarComponent extends BaseController implements OnInit {
       if (storedUser) {
         this.loggedInUser = JSON.parse(storedUser);
         console.log('Datos del usuario logueado:', this.loggedInUser);
+        console.log("logg",this.loggedInUser.role)
         if (this.loggedInUser.role) {
           this.getUserRoles(this.loggedInUser.role);
         }
@@ -99,6 +100,7 @@ logout() {
     this.rolService.getListByUserRole(userRole)
       .then((roles: any) => {
         this.userRoles = roles[0].permisos;
+        console.log("misroles",roles)
         console.log(this.userRoles[0].permisos);
 
 
