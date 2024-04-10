@@ -10,11 +10,12 @@ import { CrudSubregionComponent } from './pages/crud-subregion/crud-subregion.co
 import { CrudZonaComponent } from './pages/crud-zona/crud-zona.component';
 import { CrudTerritorioComponent } from './pages/crud-territorio/crud-territorio.component';
 import { CrudPuntodeventaComponent } from './pages/crud-puntodeventa/crud-puntodeventa.component';
+import { CrudSkuComponent } from './pages/crud-sku/crud-sku.component';
 
 export const routes: Routes = [
 
-//  { path: 'login', component: LoginComponent  }, // Página de inicio de sesión
-  //{ path: '', component: HomeComponent  }, // Página de inicio protegida por el guardia de autenticación
+ { path: 'login', component: LoginComponent  }, // Página de inicio de sesión
+  { path: '', component: HomeComponent  }, // Página de inicio protegida por el guardia de autenticación
   { path: 'persona', component: CrudPersona }, // Otras rutas protegidas por el guardia de autenticación
   { path: 'roles', component: CrudRolesComponent  },
   { path: 'proveedor', component: CrudProveedorComponent },
@@ -23,4 +24,5 @@ export const routes: Routes = [
   { path: 'zonas', component: CrudZonaComponent },
   { path: 'territorios', component: CrudTerritorioComponent },
   { path: 'punto_de_ventas', component: CrudPuntodeventaComponent },
+  { path: 'sku', component: CrudSkuComponent },
 ];
