@@ -13,16 +13,15 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore'
 import { provideAnimations } from '@angular/platform-browser/animations';
 
-    const firebaseConfig = {
-        projectId: "test-cbntrade",
-        appId: "1:164556829628:web:91ce830488533ef4afb1b9",
-        storageBucket: "test-cbntrade.appspot.com",
-        apiKey: "AIzaSyDbWH-Nxg2FuR9H1-yk7rjEVY6_XwG9juw",
-        authDomain: "test-cbntrade.firebaseapp.com",
-        messagingSenderId: "164556829628",
-        measurementId: "G-H7B0ECN420"
-      };
-
+const firebaseConfig = {
+  apiKey: "AIzaSyA7To-Oo1GkokTjnzO13rDVX79dj9H3G6s",
+  authDomain: "fireabase-7aaef.firebaseapp.com",
+  projectId: "fireabase-7aaef",
+  storageBucket: "fireabase-7aaef.appspot.com",
+  messagingSenderId: "356563077766",
+  appId: "1:356563077766:web:6c60ad9920bed0ef6e1f07",
+  measurementId: "G-YM9VHPKFFJ"
+};
 initializeApp(firebaseConfig);
 
 export const appConfig: ApplicationConfig = {

@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "test-cbntrade",
-    "cbn": "test-cbntrade"
+    "cbn": "test-cbntrade",
+    "y": "fireabase-7aaef"
   },
   "targets": {
     "testauth-293c3": {
