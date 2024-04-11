@@ -42,8 +42,9 @@ export class CrearRolComponent extends ModalBaseController {
           {url_relative:"./#/equipos_frios",nombre:"Equipos Calientes"},
           {url_relative:"./#/equipo_pesado",nombre:"Equipo Pesados"},
           {url_relative:"./#/proveedor",nombre:"Proveedores"},
+          {url_relative:"./#/sku",nombre:"Sku"},
 
-          );
+          );  
         console.log("list_permisos");
         console.log(this.list_permisos);
         this.agregarSubMenu();

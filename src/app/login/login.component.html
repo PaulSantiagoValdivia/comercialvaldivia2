@@ -9,31 +9,29 @@
         <label for="phone">Utiliza tu número de teléfono:</label>
         <div class="phone-input">
           <img src="/assets/bolivia.png" alt="Bolivia">+591
-          <input type="tel" id="phone" [(ngModel)]="phoneNumber" autofocus>
+          <input type="tel" id="phone" [(ngModel)]="phoneNumber" autofocus (keyup.enter)="sendVerificationCode()">
         </div>
         <div id="recaptcha-container"></div>
-        <button (click)="sendVerificationCode()" [ngClass]="{'button-animation': animacion, 'otra-clase': !animacion}" *ngIf="!confirmationResult">
+        <button (click)="sendVerificationCode()" [ngClass]="{'button-animation': animacion, 'otra-clase': !animacion}" *ngIf="!confirmationResult && phoneNumber" (keyup.enter)="sendVerificationCode()">
           Enviar código de verificación
         </button>
-
       </div>
 
       <div *ngIf="confirmationResult">
         <label for="verificationCode">Ingresa el código de verificación:</label>
-        <input type="text" id="verificationCode" [(ngModel)]="verificationCode" autofocus>
-         <button (click)="verifyCode()">Ingresar</button>
+        <input type="text" id="verificationCode" [(ngModel)]="verificationCode" autofocus (keyup.enter)="verifyCode()">
+        <button (click)="verifyCode()" *ngIf="verificationCode" >Ingresar</button>
       </div>
     </div>
   </div>
   <div class="login-card" *ngIf="userExist">
-    <p class="sub-title1">¡Ups! No cuentas con un registro. deseas registrarte?</p>
+    <p class="sub-title1">¡Ups! No cuentas con un registro. ¿Deseas registrarte?</p>
     <p class="sub-title1">¡Ojo! Solo si eres usuario CBN</p>
     <form (ngSubmit)="registerPerson()">
       <label for="nombre">Ingresa tus nombres:</label>
       <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
       <label for="lastname">Ingresa tus apellidos:</label>
       <input type="text" id="lastname" [(ngModel)]="lastname" name="lastname">
-
       <button type="submit">Registrarse</button>
     </form>
   </div>
@@ -44,3 +42,4 @@
     <p class="sub-title1">Su cuenta está esperando a ser validada por CBN. Por favor, intente iniciar sesión más tarde o comuníquese con el equipo de CBN.</p>
   </div>
 </div>
+
