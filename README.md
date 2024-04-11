@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # frontGestionTrade
 Panel administrativo para Trade
 =======
@@ -30,3 +31,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 >>>>>>> master
+=======
+# comercialvaldivia2
+>>>>>>> 649296cf4304a4e60020075125d061450331e0c2
