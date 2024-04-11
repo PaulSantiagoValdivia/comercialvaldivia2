@@ -18,7 +18,7 @@ export class SkuService {
     result.forEach((doc) => {
       let obj:Sku=Object.setPrototypeOf(doc.data(), Sku.prototype);
       obj.key=doc.id;
-      if(activo==null)
+      if(activo==null && !obj.deleted)
         d.push(obj);
         else{
           if(activo == obj.activo)d.push(obj);
@@ -30,6 +30,7 @@ export class SkuService {
 
   async create(data:Sku) {
     data.creado = new Date().toISOString();
+    data.deleted = false;
 
     let copia=JSON.parse(JSON.stringify(data));
     console.log(copia);
@@ -51,6 +52,13 @@ export class SkuService {
   async delete(key: any, delet?: boolean) {
     let result = await updateDoc(doc(this.firestore, this.collection_name, key), {
       activo: delet ? delet : false,
+    });
+    console.log("Eliminado correctamente: ", result, "delete: ", delet);
+  }
+
+  async delete2(key: any, delet?: boolean) {
+    let result = await updateDoc(doc(this.firestore, this.collection_name, key), {
+      deleted: delet ? false :true,
     });
     console.log("Eliminado correctamente: ", result, "delete: ", delet);
   }

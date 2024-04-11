@@ -13,19 +13,23 @@
           <label for="firstname2">Sku:</label>
           <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.sku" class="w-full" />
         </div>
+
         <div class="field md:col-2">
           <label for="firstname2">Modelo:</label>
           <p-inputNumber [useGrouping]="false" styleClass="w-full" class="w-full" inputStyleClass="w-full" [disabled]="this.type==3" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.modelo"> </p-inputNumber>
-
         </div>
+
         <div class="field md:col-8">
           <label for="firstname2">Tipo:</label>
           <input [disabled]="type==3" pInputText id="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.obj.tipo" class="w-full" />
         </div>
+
       <div class="field md:col-2">
           <label for="lastname2">Estado: </label><br>
           <p-inputSwitch [disabled]="this.type==3" [(ngModel)]="this.obj.activo"></p-inputSwitch>
       </div>
+
+
   </div>
 
 

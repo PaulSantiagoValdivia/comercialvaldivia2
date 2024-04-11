@@ -5,4 +5,5 @@ export class Sku {
   tipo?: string;
   activo?: boolean = false;
   creado?: any = null;
+  deleted? : boolean = false;
 }
