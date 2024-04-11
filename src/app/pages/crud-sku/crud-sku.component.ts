@@ -66,7 +66,7 @@ export class CrudSkuComponent extends BaseController{
   async clickEliminar(data:Sku){
     try{
       this.showLoader();
-    await this.service.delete(data.key,false);
+    await this.service.delete2(data.key,false);
     this.hideLoader();
     this.recargarLista_();
     this.showToastSuccess("Eliminado correctamente");
